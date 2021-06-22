@@ -155,6 +155,6 @@ void RunDauSach(){
 	setlinestyle(SOLID_LINE, 0, 1);
 	line(XDS[6]+10, 0, XDS[6]+10, h);
 	
-	DrawDanhSachDauSach();
+	//DrawDanhSachDauSach();
 }
 //===========================================
