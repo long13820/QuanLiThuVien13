@@ -68,6 +68,7 @@ void Event(){
 //		MuonTraEvent();
 //	}else if(curMenu == btnThongTin.id){
 //		ThongTinEvent();
+//==========================
 	}
 }
 
