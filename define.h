@@ -1,10 +1,10 @@
 #define BG_COLOR 						0
-#define BG_EDITTEXT_COLOR				2
-#define TEXT_TITLE_COLOR				7   //Ma mau chu title
-#define TEXT_COLOR 						9   //Ma mau chu 
+#define BG_EDITTEXT_COLOR				4   //MA MAU KHUNG NHAP
+#define TEXT_TITLE_COLOR				7   //MA MAU CHU TITLE
+#define TEXT_COLOR 						9   //MA MAU CHU
 #define BORDER_COLOR 					11
-#define TEXT_EDIITEXT_TITLE_COLOR 		14
-#define TEXT_EDIITEXT_HINT_COLOR 		7
+#define TEXT_EDIITEXT_TITLE_COLOR 		15	//MA MAU NHAP TEXT
+#define TEXT_EDIITEXT_HINT_COLOR 		7   //MA MAU NHAP HUONG DAN PHAN NHAP
 #define TEXT_EDITTEXT_COLOR				14
 #define BG_BUTTON_DEFAULT 				7
 #define BG_BUTTON_SELECT 				3

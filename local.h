@@ -1,3 +1,4 @@
+
 // lay max width, height cua man hinh
 int w = GetSystemMetrics(SM_CXSCREEN);
 int h = GetSystemMetrics(SM_CYSCREEN);
@@ -5,7 +6,7 @@ int h = GetSystemMetrics(SM_CYSCREEN);
 //Window Window;
 //SubWindow subWindow;
 
-
+int XDS[7] = {10, 200, 500, 600, 800, 900, 1100};
 //Button Main Menu
 int btnHeight = 50, btnWidth = 300, btnSpace = 80, btnY = 200;
 Button btnQLDauSach(100, w/2-btnWidth/2, btnY + btnSpace, btnWidth, btnHeight, "QUAN LY DAU SACH", 0);
@@ -13,6 +14,24 @@ Button btnQLDocGia(101, w/2-btnWidth/2, btnY + 2*btnSpace, btnWidth, btnHeight, 
 Button btnQLSach(102, w/2-btnWidth/2, btnY + 3*btnSpace, btnWidth, btnHeight, "MUON TRA SACH", 0);
 Button btnThongTin(103, w/2-btnWidth/2, btnY + 4*btnSpace, btnWidth, btnHeight, "THONG TIN", 0);
 Button btnThoat(104, w/2-btnWidth/2, btnY + 5*btnSpace, btnWidth, btnHeight, "THOAT", 0);
+// Button Dau Sach
+Button btnQuayVe(201, 10, 10, 100, 50, "< MENU", 0);
+Button btnClearTimDauSach(202, 800, 70, 100, 50, "CLEAR", 0);
+Button btnPrevDauSach(203, 10, 770, 150, 50, "TRANG TRUOC", 0);
+Button btnNextDauSach(204, XDS[6]-150, 770, 150, 50, "TRANG SAU", 0);
+
+EditText edTimDauSach(1000, 50, 70, 700, 50, "Tim dau sach:", "", "Nhap ten sach vao day");
+
+// Them Dau Sach
+EditText edThemISBN(1002, XDS[6]+50, 290, 700, 40, "ISBN :","","Chi nhan so va chu cai, toi da 10 ki tu");
+EditText edThemTenSach(1003, XDS[6]+50, 340, 700, 40, "Ten sach :","","Chi nhan chu cai va so, toi da 22 ki tu");
+EditText edThemSoTrang(1004, XDS[6]+50, 390, 700, 40, "So trang :","","Chi nhan so, toi da 5 ki tu");
+EditText edThemTacGia(1005, XDS[6]+50, 440, 700, 40, "Tac gia :","","Chi nhan chu cai, toi da 12 ki tu");
+EditText edThemNXB(1006, XDS[6]+50, 490, 700, 40, "Nam xuat ban :","","Chi nhan so");
+EditText edThemTheLoai(1007, XDS[6]+50, 540, 700, 40, "The loai :","","Chi nhan chu cai, toi da 12 ki tu");
+
+Button btnThemDauSach(205, (w-15+XDS[6])/2 - 50, 590, 150, 50, "THEM", 0);
+
 
 // toa do con tro chuot hien tai
 int mx = -1, my = -1;
@@ -22,8 +41,11 @@ int mx = -1, my = -1;
 int curMenu=0;
 
 
-
+char mess[50];
 char AppTitle[]="LIBRARY MANAGEMENT";
+char DauSachTitle[]="DANH SACH DAU SACH";
+
+
 
 void ClearScreen();//RESET MAN HINH
 void DrawMenu();//VE MENU
@@ -33,6 +55,8 @@ void ButtonEffect(Button &btn);//HIEU UNG NUT
 void SetMenuSelect(int menuID);//CHON NUT MENU
 void RunDauSach();//CHAY DAU SACH
 void DrawDanhSachDauSach();//VE DANH SACH DAU SACH
+void ClearContentThemDauSach();//XOA NOI DUNG THEM DAU SACH
+void DrawList();//
 
 //==================CLEAR MAN HINH================
 void ClearScreen(){
@@ -122,7 +146,7 @@ void ButtonEffect(Button &btn){
 	} 
 }
 //====================================================
-//////
+
 
 //===============CHON NUT MENU===============
 void SetMenuSelect(int menuID){
@@ -149,12 +173,51 @@ void SetMenuSelect(int menuID){
 }
 //==========================================
 
-//==================CHAY DAU SACH============
-int XDS[7] = {10, 200, 500, 600, 800, 900, 1100};
-void RunDauSach(){
-	setlinestyle(SOLID_LINE, 0, 1);
-	line(XDS[6]+10, 0, XDS[6]+10, h);
-	
-	//DrawDanhSachDauSach();
-}
-//===========================================
+
+
+
+
+//==================
+//void DrawList(){
+//	ClearLayoutListDauSach();
+//	DrawBorderList();
+//	char ch[6][20] = {"ISBN", "Ten sach", "So trang", "Tac gia", "NXB", "The loai"};
+//		
+//	settextstyle(SANS_SERIF_FONT, HORIZ_DIR, 2);
+//	for(int i=0; i < 6; i++){
+//		setbkcolor(BG_COLOR);
+//		outtextxy(XDS[i] + (XDS[i+1]-XDS[i])/2 - textwidth(ch[i])/2, 170, ch[i]);
+//	}
+//	
+//	// caculate Total Page 
+//	// Num per page = 13
+//	
+//	
+//	setcolor(TEXT_COLOR);
+//	if(strlen(edTimDauSach.content) == 0){
+//		totalPageDauSach = (DSDS.n-1) / 13 + 1;
+//		for(int i = 13*(curPageDauSach-1); i < 13*curPageDauSach ; i++){
+//			if (i >= DSDS.n) break;
+//			DrawItemDauSach(i, -1);
+//		}
+//	}else{
+//		totalPageDauSach = (sizeListIndexDauSachSearch-1) / 13 + 1;
+//		int j = 0;
+//		for(int i = 13*(curPageDauSach-1); i < 13*curPageDauSach ; i++){
+//			if (i >= sizeListIndexDauSachSearch) break;
+//			DrawItemDauSach(listIndexDauSachSearch[i], j++);
+//		}
+//	}
+//	
+//	// num page
+//	settextstyle(BOLD_FONT, HORIZ_DIR, 2);
+//	char chPage[20];
+//	sprintf(chPage, "TRANG %d / %d", curPageDauSach, totalPageDauSach);
+//	outtextxy((XDS[0]+XDS[6])/2 - textwidth(chPage)/2, 785, chPage);
+//	
+//	// tips
+//	setcolor(TIPS);
+//	rectangle(XDS[0], 880, XDS[6], 980);
+//	outtextxy(30, 890, "Click chuot trai: Hieu chinh dau sach");
+//	outtextxy(30, 920, "Click chuot phai: Xem thong tin, danh muc sach");
+//}

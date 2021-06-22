@@ -16,7 +16,7 @@ using namespace std;
 
 #include "view.h"
 #include "local.h"
-
+#include "dausach.h"
    
 bool isExit = false;
 
