@@ -1,3 +1,5 @@
+
+
 //==================CHAY DAU SACH============
 void RunDauSach(){
 	strcpy(mess, "");
