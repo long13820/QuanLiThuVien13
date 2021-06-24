@@ -17,7 +17,10 @@ using namespace std;
 #include "view.h"
 #include "local.h"
 #include "dausach.h"
-   
+
+#include "cautrucdausach.h"
+#include "cautrucdanhmucsach.h"
+
 bool isExit = false;
 
              
@@ -26,7 +29,7 @@ int main(int argc, char *argv[])
 	srand(time(NULL));
 	initwindow(w, h, AppTitle);
 	ClearScreen();
-	
+	//ReadDauSachTuFile(DSDS);
 	
 	DrawMenu();
 	

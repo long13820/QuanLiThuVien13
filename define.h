@@ -17,4 +17,4 @@
 
 
 enum Window {THEM_DAU_SACH};
-enum subWindow {NHAP_SACH};
+enum SubWindow {NHAP_SACH};
