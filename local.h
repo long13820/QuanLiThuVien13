@@ -3,9 +3,11 @@
 int w = GetSystemMetrics(SM_CXSCREEN);
 int h = GetSystemMetrics(SM_CYSCREEN);
 
-//Window Window;
-//SubWindow subWindow;
+Window Window;
+SubWindow subWindow;
 
+
+int totalPageDauSach = 1, curPageDauSach = 1;
 int XDS[7] = {10, 200, 500, 600, 800, 900, 1100};
 //Button Main Menu
 int btnHeight = 50, btnWidth = 300, btnSpace = 80, btnY = 200;
@@ -45,18 +47,21 @@ char mess[50];
 char AppTitle[]="LIBRARY MANAGEMENT";
 char DauSachTitle[]="DANH SACH DAU SACH";
 
+void ClearScreen();//RESET MAN HINH(DONE)
+void DrawMenu();//VE MENU(DONE)
+void ButtonEffect(Button &btn);//HIEU UNG NUT(DONE)
+void MenuEvent();//BAT SU KIEN MENU(DONE)
+void Event(); //BAT SU KIEN(DONE)
+void SetMenuSelect(int menuID);//CHON NUT MENU(DONE)
+void DrawDanhSachDauSach();//VE DANH SACH DAU SACH(DONE)
+void RunDauSach();//CHAY DAU SACH(NOT DONE)
+void DauSachEvent();//CHAY SU KIEN DAU SACH
+void DrawBorderList();//VE KHUNG DANH SACH (DONE)
+void DrawBorderListSach();
+void DrawList();//VE DANH SACH
+void ClearContentThemDauSach();//XOA NOI DUNG THEM DAU SACH(DONE)
+void ClearLayoutListDauSach();//XOA LAYOUT DANH SACH DAU SACH
 
-
-void ClearScreen();//RESET MAN HINH
-void DrawMenu();//VE MENU
-void Event(); //BAT SU KIEN
-void MenuEvent();//BAT SU KIEN MENU
-void ButtonEffect(Button &btn);//HIEU UNG NUT
-void SetMenuSelect(int menuID);//CHON NUT MENU
-void RunDauSach();//CHAY DAU SACH
-void DrawDanhSachDauSach();//VE DANH SACH DAU SACH
-void ClearContentThemDauSach();//XOA NOI DUNG THEM DAU SACH
-void DrawList();//
 
 //==================CLEAR MAN HINH================
 void ClearScreen(){
@@ -85,12 +90,12 @@ void Event(){
 	if(curMenu == 0){
 		MenuEvent();
 	}
-//	else if(curMenu == btnQLDauSach.id){
-//		DauSachEvent();
-//	}
-//	else if(curMenu == btnQLDocGia.id){
-//		DocGiaEvent();
-//	}
+	else if(curMenu == btnQLDauSach.id){
+		DauSachEvent();
+	}
+	else if(curMenu == btnQLDocGia.id){
+		DocGiaEvent();
+	}
 //	else if(curMenu == btnQLSach.id){
 //		MuonTraEvent();
 //	}
@@ -177,47 +182,4 @@ void SetMenuSelect(int menuID){
 
 
 
-//==================
-//void DrawList(){
-//	ClearLayoutListDauSach();
-//	DrawBorderList();
-//	char ch[6][20] = {"ISBN", "Ten sach", "So trang", "Tac gia", "NXB", "The loai"};
-//		
-//	settextstyle(SANS_SERIF_FONT, HORIZ_DIR, 2);
-//	for(int i=0; i < 6; i++){
-//		setbkcolor(BG_COLOR);
-//		outtextxy(XDS[i] + (XDS[i+1]-XDS[i])/2 - textwidth(ch[i])/2, 170, ch[i]);
-//	}
-//	
-//	// caculate Total Page 
-//	// Num per page = 13
-//	
-//	
-//	setcolor(TEXT_COLOR);
-//	if(strlen(edTimDauSach.content) == 0){
-//		totalPageDauSach = (DSDS.n-1) / 13 + 1;
-//		for(int i = 13*(curPageDauSach-1); i < 13*curPageDauSach ; i++){
-//			if (i >= DSDS.n) break;
-//			DrawItemDauSach(i, -1);
-//		}
-//	}else{
-//		totalPageDauSach = (sizeListIndexDauSachSearch-1) / 13 + 1;
-//		int j = 0;
-//		for(int i = 13*(curPageDauSach-1); i < 13*curPageDauSach ; i++){
-//			if (i >= sizeListIndexDauSachSearch) break;
-//			DrawItemDauSach(listIndexDauSachSearch[i], j++);
-//		}
-//	}
-//	
-//	// num page
-//	settextstyle(BOLD_FONT, HORIZ_DIR, 2);
-//	char chPage[20];
-//	sprintf(chPage, "TRANG %d / %d", curPageDauSach, totalPageDauSach);
-//	outtextxy((XDS[0]+XDS[6])/2 - textwidth(chPage)/2, 785, chPage);
-//	
-//	// tips
-//	setcolor(TIPS);
-//	rectangle(XDS[0], 880, XDS[6], 980);
-//	outtextxy(30, 890, "Click chuot trai: Hieu chinh dau sach");
-//	outtextxy(30, 920, "Click chuot phai: Xem thong tin, danh muc sach");
-//}
+

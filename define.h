@@ -1,4 +1,4 @@
-#define BG_COLOR 						0
+#define BG_COLOR 						0	//MA MAU BACKGROUND		
 #define BG_EDITTEXT_COLOR				4   //MA MAU KHUNG NHAP
 #define TEXT_TITLE_COLOR				7   //MA MAU CHU TITLE
 #define TEXT_COLOR 						9   //MA MAU CHU
@@ -12,3 +12,9 @@
 #define TEXT_BUTTON_DEFAULT				 0
 #define LINE							3
 #define TIPS 							14
+
+#define MAX_SIZE_DAUSACH                   300
+
+
+enum Window {THEM_DAU_SACH};
+enum subWindow {NHAP_SACH};
