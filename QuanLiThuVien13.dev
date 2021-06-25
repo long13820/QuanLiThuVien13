@@ -11,7 +11,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=-lbgi -lgdi32 -luser32
+Linker=
 IsCpp=1
 Icon=
 ExeOutput=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=0000000100000000000000000
-UnitCount=7
+UnitCount=6
 
 [VersionInfo]
 Major=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=local.h
+FileName=DSDocGia.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=define.h
+FileName=xu_ly.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -81,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=view.h
+FileName=DauSach.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=dausach.h
+FileName=Marcro.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,17 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=cautrucdausach.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
-FileName=cautrucdanhmucsach.h
+FileName=ve_hinh.h
 CompileCpp=1
 Folder=
 Compile=1
