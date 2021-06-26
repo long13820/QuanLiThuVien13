@@ -2,20 +2,25 @@
 #include <tchar.h>
 #include <iostream>
 #include <fstream>
+#include <conio.h>
 //#include "DSDocGia.h"
 //#include "DauSach.h"
-#include "mylib.h"
 #include <string>
+#include "ve_hinh.h"
 using namespace std;
 
 void Introduce();
-// xu ly MeNu chinh
+
+
+// XU LY MENU CHINH
 void MainMenu();
 
+// hieu ung man hinh chinh
+void ManHinhChinh();
 
+char dongChuChay[] = "   WECOME TO MANAGER LIBRARY";
 
-
-
+//===================================================================
 void Introduce(){
 	system("color CE");
 	ShowCur(false);
@@ -58,8 +63,83 @@ void Introduce(){
 	gotoxy(xTen+70, yTen + 2);
 	cout << "LOP   : D18CQCN01-N";
 	
-	CayLoading();
+	CayLoading(LIGHT_YELLOW);
+	ShowCur(false);
+	
+	// nhan enter de thoat vong lap
+	gotoxy(45, 35);
+	SetBGColor(BLUE);
+	cout << "PRESS ENTER TO CONTINUE!! ";
+	normalBGColor();
+	
+	while(!_kbhit())
+	{
+		gotoxy(35,30);
+		SetColor(1 +rand() % 15);
+		Sleep(100);
+		//cout<<"LIBRARY MANAGEMENT";
+	}
+//	SetBGColor(AQUA);
+//	SetColor(AQUA);
+	cin.ignore();
+	
+//	//AM THANH
+//	Beep(600,200);
+	return;
 }
+//===================================================================
+
+
+//===================================================================
+void ManHinhChinh(){
+	system("color CE");
+	clrscr();
+	normalTextColor();
+	ShowCur(false);
+	VeKhungMenu();
+
+	normalBGColor();
+	DrawMainMenu(keyMainMenu, 5);
+	normalBGColor();
+	
+	string a;
+	int y=0;
+	
+	//LAY TU FILE VA CHI DOC
+	ifstream inFile("QuanLyThuVien.txt",ios::in);
+	
+	//KIEM TRA XEM FILE CO KET NOI DC KO
+	if(inFile.good()){
+		while(!inFile.eof()){
+			getline(inFile,a);
+			SetColor(11);
+			Sleep(100);
+			gotoxy(25, y++);
+			cout <<a<<endl;
+		}
+	}
+	else  //TRA VE LOI
+	{
+		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
+	}
+	normalBGColor();
+	SetBGColor(BLACK);
+	
+	// set khung
+	gotoxy(xOrdinal + 44, yOrdinal + 34);
+	cout << char(201) << setw(40) << setfill(char(205)) << char(187);
+
+	gotoxy(xOrdinal + 44, yOrdinal + 35);
+	cout << char(186) << setw(40) << setfill(' ') << char(186);
+
+	gotoxy(xOrdinal + 44, yOrdinal + 36);
+	cout << char(200) << setw(40) << setfill(char(205)) << char(188);
+
+	ChuChay(dongChuChay, xOrdinal + 50, yOrdinal + 35);
+	inFile.close();
+	return;
+}
+//===================================================================
 void MainMenu(){
 	int result;
 	
@@ -73,7 +153,16 @@ void MainMenu(){
 	// hieu ung introduce.
 	Introduce();
 	
+	clrscr();
 	
-//	int type;
-//	bool check = true;
+	int type;
+	bool check = true;
+	//VONG LAP VO HAN DE XU LY
+	while(true)
+	{
+label:
+	 ManHinhChinh();
+//	 if(check) {type=ChooseMainMenu(5);}	;				
+}
+	
 }

@@ -4,8 +4,8 @@
 //#include "Ve_Hinh.h"
 #include "mylib.h"
 
-using namespace std;
-
+//using namespace std;
+//
 //struct DocGia{
 //	uint MADG;
 //	
@@ -22,4 +22,6 @@ using namespace std;
 //	DOC_GIA DG;
 //	struct NodeDG *pLeft;
 //	struct NodeDG *pRight;
+//	
+//	LIST_MS dsmt
 //};
