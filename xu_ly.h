@@ -18,7 +18,11 @@ void MainMenu();
 // hieu ung man hinh chinh
 void ManHinhChinh();
 
+
+//HIEU UNG CHU CHAY
 char dongChuChay[] = "   WECOME TO MANAGER LIBRARY";
+
+
 
 //===================================================================
 void Introduce(){
@@ -112,6 +116,7 @@ void ManHinhChinh(){
 	if(inFile.good()){
 		while(!inFile.eof()){
 			getline(inFile,a);
+			SetBGColor(3);
 			SetColor(11);
 			Sleep(100);
 			gotoxy(25, y++);
@@ -162,7 +167,33 @@ void MainMenu(){
 	{
 label:
 	 ManHinhChinh();
-//	 if(check) {type=ChooseMainMenu(5);}	;				
+	 if(check) {type= ChooseMainMenu(5);}
+	 gotoxy(55,32);
+	 cout << "ESC: VE MENU CHINH";
+	 
+	 switch(type)
+	 {
+	 	case 0:
+	 		SubMainMenu1(keySubMainMenu1, 3);
+	 		
+	 		result = ChooseSubMenu(keySubMainMenu1,xSubMainMenus1, ySubMainMenus1, 3);
+	 		
+	 		if(result == -1){
+	 			check = true ;	
+	 			goto label;
+			}
+			if(result == 0)
+			{
+				
+			}
+	 		check = false;
+			type = 0;
+			goto label;
+	 		break;
+	 	case 1:
+	 		
+	 }
+	 				
 }
 	
 }
