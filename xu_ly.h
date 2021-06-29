@@ -182,7 +182,7 @@ label:
 	 			check = true ;	
 	 			goto label;
 			}
-			if(result == 0)
+			if (result == 0)
 			{
 				
 			}
@@ -191,9 +191,40 @@ label:
 			goto label;
 	 		break;
 	 	case 1:
+	 		SubMainMenu2(keySubMainMenu2, 3);
 	 		
+	 		result = ChooseSubMenu(keySubMainMenu2, xSubMainMenus2, ySubMainMenus2, 3);
+	 		
+	 		if(result == -1)
+	 		{
+	 			check = true;
+				goto label;	
+			}
+			
+			check = false;
+			type = 1;
+			goto label;
+			break;
+		case 2:
+	 		SubMainMenu3(keySubMainMenu3, 3);
+	 		
+	 		result = ChooseSubMenu(keySubMainMenu3, xSubMainMenus3, ySubMainMenus3, 3);
+	 		
+	 		if(result == -1)
+	 		{
+	 			check = true;
+				goto label;	
+			}
+			
+			check = false;
+			type = 2;
+			goto label;
+			break;
+		case 3:
+			//LUU DATA TU CHUONG TRINH VAO FILE
+			return;
 	 }
 	 				
-}
+	}
 	
 }

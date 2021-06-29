@@ -1,27 +1,20 @@
+#pragma once
+#include <iostream>
 #include <string>
-//#include "GlobalVariable.h"
-//#include "Check_Nhap.h"
-//#include "Ve_Hinh.h"
 #include "mylib.h"
+#include "Muon_Tra.h"
+using namespace;
 
-//using namespace std;
-//
-//struct DocGia{
-//	uint MADG;
-//	
-//	string ho;
-//	string ten;
-//	
-//	
-//	uint gioitinh;
-//	uint trangthaithe;
-//};
-//typedef struct DocGia DOC_GIA;
-//
-//struct NodeDG{
-//	DOC_GIA DG;
-//	struct NodeDG *pLeft;
-//	struct NodeDG *pRight;
-//	
-//	LIST_MS dsmt
-//};
+
+struct DocGia{
+	int MADG,gioitinh,trangthai;
+	string ho,ten;
+};
+typedef struct DocGia DOC_GIA;
+
+struct NodeDG{
+	DOC_GIA DG;
+	struct NodeDG *pLeft;
+	struct NodeDG *pRight;
+	
+};

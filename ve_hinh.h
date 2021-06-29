@@ -48,15 +48,13 @@ void HighLight1(string key, int index, int x, int y[], int newColor, int oldColo
 string keySubMainMenu1[3] = { "            CAP NHAT DOC GIA                 ",
 							"     HIEN THI DANH SACH TAT CA DOC GIA       ",
 							"  HIEN THI DS CAC DOC GIA MUON SACH QUA HAN  " };
+string keySubMainMenu3[3] = { "       TRA SACH       ",
+								" SACH MUON NHIEU NHAT ",
+								"       MUON SACH      " };
+								
 string keySubMainMenu2[3] = { "    CAP NHAT DAU SACH   ",
 							"  HIEN THI CAC DAU SACH " ,
 							" CAP NHAT DANH MUC SACH "};
-
-
-string keySubMainMenu1[3] = { "            CAP NHAT DOC GIA                 ",
-							"     HIEN THI DANH SACH TAT CA DOC GIA       ",
-							"  HIEN THI DS CAC DOC GIA MUON SACH QUA HAN  " };
-
 int xMainMenus[5] = { 8,40,66, 95,120 };
 int ySubMainMenus1[3] = { 20, 24, 28};
 int ySubMainMenus2[3] = { 22, 26, 30 };
@@ -180,7 +178,7 @@ int ChooseMainMenu(int nKey){
 			switch(kb_hit)
 			{
 				case KEY_LEFT:
-					Beep(500,50);
+					//Beep(500,50);
 					if(currposMainMenu > 0)
 					{
 						currposMainMenu = currposMainMenu - 1 ;
@@ -191,7 +189,7 @@ int ChooseMainMenu(int nKey){
 					EffectiveMenu(currposMainMenu, 2);
 					break;
 				case KEY_RIGHT:
-					Beep(400,50); //key right
+					//Beep(400,50); //key right
 					if(currposMainMenu < nKey - 2)
 					{
 						currposMainMenu = currposMainMenu + 1 ;
@@ -202,7 +200,7 @@ int ChooseMainMenu(int nKey){
 					EffectiveMenu(currposMainMenu, 1);
 					break ;
 				case ENTER: //enter
-					Beep(600, 50);
+					//Beep(600, 50);
 					return currposMainMenu;
 
 			}
@@ -318,7 +316,24 @@ int ChooseSubMenu(string key[], int xSubMenu, int ykey[], int nKey){
 					else{
 						currposSubMainMenu = nKey - 1;
 					}
-					
+					EffectiveSubMenu(key,xSubMenu,ykey,nKey,currposSubMainMenu,2);
+					//Beep(300,10);
+					break;
+				case KEY_DOWN:
+					if(currposSubMainMenu < nKey - 1){
+						currposSubMainMenu = currposSubMainMenu + 1;
+					}
+					else{
+						currposSubMainMenu = 0;
+					}
+					EffectiveSubMenu(key,xSubMenu,ykey,nKey,currposSubMainMenu,1);
+					//Beep(250,10);
+					break;
+				case ESC:
+					return -1;	
+				case ENTER:
+					//Beep(600, 10);
+					return currposSubMainMenu;
 			}
 		}
 	}
@@ -328,7 +343,7 @@ int ChooseSubMenu(string key[], int xSubMenu, int ykey[], int nKey){
 //===========================================
 void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, int flag)
 {
-	// 0 --> 3; 3 --> 2;   2---> 1;  1---> 0
+	// 0 ---> 1; 1 ---> 2; 2 ----> 3 ; 3 ---> 0
 	if(flag == 1){
 		ShowCur(false);
 		
@@ -340,8 +355,21 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, 
 		gotoxy(xSubMenu - 1,ykey[(pos + nKey - 1) % nKey]);
 		SetBGColor(BLACK);
 		SetColor(LIGHT_YELLOW);
-		cout <<key[(pos + 1)% nKey];
+		cout <<key[(pos + nKey - 1)% nKey];
 	}
-	
+	else if (flag == 2){
+	// 0 --> 3; 3 --> 2;   2---> 1;  1---> 0
+		ShowCur(false);
+		
+		gotoxy(xSubMenu - 1, ykey[pos]);
+		SetBGColor(GREEN);
+		SetColor(WHITE);
+		cout << key[pos];
+
+		gotoxy(xSubMenu - 1, ykey[(pos + 1) % nKey]);
+		SetBGColor(BLACK);
+		SetColor(LIGHT_YELLOW);
+		cout << key[(pos + 1) % nKey];
+	}
 }
 //===========================================
