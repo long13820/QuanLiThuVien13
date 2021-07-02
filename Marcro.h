@@ -91,9 +91,9 @@ typedef unsigned int uint;
 #define Min_MADG 0
 
 // toa do x cua SubMainMenus
-#define xSubMainMenus1 40
-#define xSubMainMenus2 52
-#define xSubMainMenus3 52
+#define xDocGia 40
+#define xDauSach 52
+#define xSach 52
 
 
 // toa do y cua  bang hien thi

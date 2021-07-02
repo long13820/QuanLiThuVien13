@@ -31,10 +31,10 @@ void cls(HANDLE hConsole);
 void clrscr();
 
 
-// chu chuyen ve mau vang
+// CHU CHUYEN VE MAU VANG
 void normalTextColor();
  
-// nen chu chuyen ve xanh  va chu chuyen ve mau vang
+// NEN CHU CHUYEN VE XANH VA CHU CHUYEN VE MAU VANG
 void normalBGColor();
 
 

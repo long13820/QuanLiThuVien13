@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <conio.h>
-//#include "DSDocGia.h"
+#include "DSDocGia.h"
 //#include "DauSach.h"
 #include <string>
 #include "ve_hinh.h"
@@ -18,11 +18,13 @@ void MainMenu();
 // hieu ung man hinh chinh
 void ManHinhChinh();
 
+// load du lieu doc gia tu File 
+void Load_DG(NODE_DG &tree);
 
 //HIEU UNG CHU CHAY
-char dongChuChay[] = "   WECOME TO MANAGER LIBRARY";
+char dongChuChay[] = "   WELCOME TO MANAGER LIBRARY";
 
-
+int *mangMaDocGia;
 
 //===================================================================
 void Introduce(){
@@ -42,7 +44,7 @@ void Introduce(){
 			cout<<a<<endl;
 		}
 	}
-	else  //Tra ve loi
+	else  //TRA VE LOI
 	{
 		cout << "Lien ket voi File introduce khong thanh cong! " << "\n";
 	}
@@ -67,10 +69,10 @@ void Introduce(){
 	gotoxy(xTen+70, yTen + 2);
 	cout << "LOP   : D18CQCN01-N";
 	
-	CayLoading(LIGHT_YELLOW);
-	ShowCur(false);
+	//CayLoading(LIGHT_YELLOW);
+//	ShowCur(false);
 	
-	// nhan enter de thoat vong lap
+	// NHAN ENTER DE THOAT KHOI VONG LAP
 	gotoxy(45, 35);
 	SetBGColor(BLUE);
 	cout << "PRESS ENTER TO CONTINUE!! ";
@@ -83,23 +85,26 @@ void Introduce(){
 		Sleep(100);
 		//cout<<"LIBRARY MANAGEMENT";
 	}
-//	SetBGColor(AQUA);
-//	SetColor(AQUA);
+	SetBGColor(AQUA);
+	SetColor(AQUA);
 	cin.ignore();
 	
-//	//AM THANH
-//	Beep(600,200);
 	return;
 }
 //===================================================================
 
+//===================================================================
+void Load_DG(NODE_DG &tree){
+	
+}
+//===================================================================
 
 //===================================================================
 void ManHinhChinh(){
 	system("color CE");
 	clrscr();
 	normalTextColor();
-	ShowCur(false);
+//	ShowCur(false);
 	VeKhungMenu();
 
 	normalBGColor();
@@ -130,7 +135,7 @@ void ManHinhChinh(){
 	normalBGColor();
 	SetBGColor(BLACK);
 	
-	// set khung
+	// SET KHUNG
 	gotoxy(xOrdinal + 44, yOrdinal + 34);
 	cout << char(201) << setw(40) << setfill(char(205)) << char(187);
 
@@ -145,23 +150,22 @@ void ManHinhChinh(){
 	return;
 }
 //===================================================================
-void MainMenu(){
-	int result;
-	
+void MainMenu(TREE_DG &tree){
 	// set console window.
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
 	
-	
-	
+//	//Load data from file
+//	Load_DG(tree);
 	
 	// hieu ung introduce.
 	Introduce();
 	
-	clrscr();
+	clrscr();//XOA MAN HINH
 	
 	int type;
 	bool check = true;
+	int result;
 	//VONG LAP VO HAN DE XU LY
 	while(true)
 	{
@@ -174,9 +178,9 @@ label:
 	 switch(type)
 	 {
 	 	case 0:
-	 		SubMainMenu1(keySubMainMenu1, 3);
+	 		MenuDocGia(keyDocGia, 3);
 	 		
-	 		result = ChooseSubMenu(keySubMainMenu1,xSubMainMenus1, ySubMainMenus1, 3);
+	 		result = ChonMucTrongMenu(keyDocGia,xDocGia, yDocGia, 3);
 	 		
 	 		if(result == -1){
 	 			check = true ;	
@@ -184,16 +188,16 @@ label:
 			}
 			if (result == 0)
 			{
-				
+				Menu_DocGia(tree);
 			}
-	 		check = false;
-			type = 0;
-			goto label;
+//	 		check = false;
+//			type = 0;
+//			goto label;
 	 		break;
 	 	case 1:
-	 		SubMainMenu2(keySubMainMenu2, 3);
+	 		MenuDauSach(keyDauSach, 3);
 	 		
-	 		result = ChooseSubMenu(keySubMainMenu2, xSubMainMenus2, ySubMainMenus2, 3);
+	 		result = ChonMucTrongMenu(keyDauSach, xDauSach, yDauSach, 3);
 	 		
 	 		if(result == -1)
 	 		{
@@ -201,14 +205,14 @@ label:
 				goto label;	
 			}
 			
-			check = false;
-			type = 1;
-			goto label;
+//			check = false;
+//			type = 1;
+//			goto label;
 			break;
 		case 2:
-	 		SubMainMenu3(keySubMainMenu3, 3);
-	 		
-	 		result = ChooseSubMenu(keySubMainMenu3, xSubMainMenus3, ySubMainMenus3, 3);
+	 		MenuSach(keySach, 3);
+	
+	 		result = ChonMucTrongMenu(keySach, xSach, ySach, 3);
 	 		
 	 		if(result == -1)
 	 		{
@@ -216,13 +220,13 @@ label:
 				goto label;	
 			}
 			
-			check = false;
-			type = 2;
-			goto label;
+//			check = false;
+//			type = 2;
+//			goto label;
 			break;
-		case 3:
-			//LUU DATA TU CHUONG TRINH VAO FILE
-			return;
+//		case 3:
+//			//LUU DATA TU CHUONG TRINH VAO FILE
+//			return;
 	 }
 	 				
 	}
