@@ -2,6 +2,7 @@
 
 int main(int argc, char** argv) {
 	TREE_DG tree;
-	MainMenu(tree);
+	LIST_DAUSACH lDS;
+	MainMenu(tree,lDS);
 	return 0;
 }

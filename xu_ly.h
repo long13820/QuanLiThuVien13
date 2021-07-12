@@ -7,9 +7,11 @@
 //#include "DauSach.h"
 #include <string>
 #include "ve_hinh.h"
+#include "DauSach.h"
 using namespace std;
 
-void Introduce();
+//PHAN GIOI THIEU
+void GioiThieu();
 
 
 // XU LY MENU CHINH
@@ -27,7 +29,7 @@ char dongChuChay[] = "   WELCOME TO MANAGER LIBRARY";
 int *mangMaDocGia;
 
 //===================================================================
-void Introduce(){
+void GioiThieu(){
 	system("color CE");
 	ShowCur(false);
 	string a;
@@ -69,14 +71,14 @@ void Introduce(){
 	gotoxy(xTen+70, yTen + 2);
 	cout << "LOP   : D18CQCN01-N";
 	
-	//CayLoading(LIGHT_YELLOW);
+	//CayLoading(LIGHT_YELLOW);**//SAU KHI XONG SE THEM
 //	ShowCur(false);
 	
 	// NHAN ENTER DE THOAT KHOI VONG LAP
 	gotoxy(45, 35);
-	SetBGColor(BLUE);
+//	SetBGColor(BLUE);
 	cout << "PRESS ENTER TO CONTINUE!! ";
-	normalBGColor();
+//	normalBGColor();
 	
 	while(!_kbhit())
 	{
@@ -85,8 +87,8 @@ void Introduce(){
 		Sleep(100);
 		//cout<<"LIBRARY MANAGEMENT";
 	}
-	SetBGColor(AQUA);
-	SetColor(AQUA);
+//	SetBGColor(AQUA);
+//	SetColor(AQUA);
 	cin.ignore();
 	
 	return;
@@ -102,14 +104,10 @@ void Load_DG(NODE_DG &tree){
 //===================================================================
 void ManHinhChinh(){
 	system("color CE");
-	clrscr();
-	normalTextColor();
+	//clrscr();
 //	ShowCur(false);
-	VeKhungMenu();
-
-	normalBGColor();
+//	VeKhungMenu();
 	DrawMainMenu(keyMainMenu, 5);
-	normalBGColor();
 	
 	string a;
 	int y=0;
@@ -121,8 +119,6 @@ void ManHinhChinh(){
 	if(inFile.good()){
 		while(!inFile.eof()){
 			getline(inFile,a);
-			SetBGColor(3);
-			SetColor(11);
 			Sleep(100);
 			gotoxy(25, y++);
 			cout <<a<<endl;
@@ -132,7 +128,7 @@ void ManHinhChinh(){
 	{
 		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
 	}
-	normalBGColor();
+//	normalBGColor();
 	SetBGColor(BLACK);
 	
 	// SET KHUNG
@@ -150,7 +146,7 @@ void ManHinhChinh(){
 	return;
 }
 //===================================================================
-void MainMenu(TREE_DG &tree){
+void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
 	// set console window.
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
@@ -159,7 +155,7 @@ void MainMenu(TREE_DG &tree){
 //	Load_DG(tree);
 	
 	// hieu ung introduce.
-	Introduce();
+	GioiThieu();
 	
 	clrscr();//XOA MAN HINH
 	
@@ -193,7 +189,7 @@ label:
 //	 		check = false;
 //			type = 0;
 //			goto label;
-	 		break;
+	 		//break;
 	 	case 1:
 	 		MenuDauSach(keyDauSach, 3);
 	 		
@@ -204,10 +200,12 @@ label:
 	 			check = true;
 				goto label;	
 			}
-			
-//			check = false;
-//			type = 1;
-//			goto label;
+			if(result == 0){
+				Menu_DauSach(lDS);
+			}
+			check = false;
+			type = 1;
+			goto label;
 			break;
 		case 2:
 	 		MenuSach(keySach, 3);
