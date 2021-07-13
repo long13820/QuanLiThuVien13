@@ -9,10 +9,6 @@
 using namespace std;
 
 
-
-//VE CAY LOADING
-void CayLoading(int Color);
-
 // VE MENU CHINH
 void DrawMainMenu(string key[], int nKey);
 
@@ -33,6 +29,13 @@ void DisplayDS(string key[], int nKey, int xDisplay[]);
 
 // ham hien thi bang thong tin doc gia
 void DisplayDG(string key[], int nKey, int xDisplay[]);
+
+// xoa mot dong
+void XoaMotDong(int width);
+
+// xoa mot phan man hinh
+void XoaMotVung(int x, int y, int ndoc, int width);
+
 
 void EffectiveMenu(int pos , int flag);
 
@@ -65,30 +68,19 @@ string keySach[3] = { "       TRA SACH       ",
 string keyDauSach[3] = { "    CAP NHAT DAU SACH   ",
 							"  HIEN THI CAC DAU SACH " ,
 							" CAP NHAT DANH MUC SACH "};
-int xDisplayDS[7] = { 1, 29, 36, 55, 67, 74 , 80 };
-int xMainMenus[5] = { 8,40,66, 95,120 };
+int xDisplayDS[7] = { 1, 35, 42, 61, 73, 83 , 93 };
+int xMainMenus[5] = { 18,50,76, 105,130 };
 int yDocGia[3] = { 20, 24, 28};
-int yDauSach[3] = { 22, 26, 30 };
+int yDauSach[3] = { 20, 24, 28 };
 int ySach[3] = { 20,23,26 };
 //int xMainMenus[5] = { 8,34,60, 89,113 };
 
 int xDisplayDG[6] = { 3,13, 32,46,53,65 };
-//===========================================
-void CayLoading(int Color){
-	SetColor(Color);
-	for (int i=xLoading; i<=xLoading +120 ;i++)
-	{
-		gotoxy(i,yLoading);
-		Sleep(15);
-		cout <<  char(219);
-	}
-}
-//===========================================
+
 
 
 //===========================================
 void DrawMainMenu(string key[], int nKey){
-	//normalBGColor();
 	for (int i=0; i < nKey;i++)
 	{
 		CreateBox(xMainMenus[i],yMainMenu, key[i],(int)key[i].length());
@@ -139,7 +131,6 @@ void ChuChay(char dChu[], int x ,int y){
 //===========================================
 int ChooseMainMenu(int nKey){
 	int currposMainMenu = -1;
-	ShowCur(false);
 	
 	int kb_hit;
 	while(true)
@@ -191,10 +182,8 @@ void EffectiveMenu(int pos, int flag){
 	// 0 ---> 1; 1 ---> 2; 2 ----> 3 ; 3 ---> 0
 	if (flag == 1)
 	{
-		//ShowCur(false);
 		gotoxy(xMainMenus[pos + 1] - 1, yMainMenu);
-		SetBGColor(BLACK);
-		SetColor(WHITE);
+		SetBGColor(AQUA);
 		cout << keyMainMenu[pos + 1] ;
 		
 		gotoxy(xMainMenus[(pos + 3) % 4 + 1] - 1 , yMainMenu);
@@ -204,11 +193,9 @@ void EffectiveMenu(int pos, int flag){
 	else if (flag == 2)
 	{
 		// 0 --> 3; 3 --> 2;   2---> 1;  1---> 0
-		//ShowCur(false);
 		
 		gotoxy(xMainMenus[pos + 1] - 1 , yMainMenu);
-		SetBGColor(BLACK);
-		SetColor(WHITE);
+		SetBGColor(AQUA);
 		cout <<  keyMainMenu[pos + 1];
 		
 		gotoxy(xMainMenus[(pos + 1) % 4 + 1] - 1, yMainMenu);
@@ -234,14 +221,14 @@ void MenuDocGia(string key[], int nKey){
 //===========================================
 void MenuDauSach(string key[], int nKey)
 {
-	normalBGColor();
-	SetBGColor(BLACK);
+//	normalBGColor();
+//	SetBGColor(BLACK);
 	for (int i = 0; i < nKey; i++)
 	{
 		CreateBox(xDauSach, yDauSach[i], key[i], (int)key[i].length());
 	}
-	HighLight1(keyDauSach[0], 0, xDauSach, yDauSach, GREEN, AQUA);
-	ShowCur(false);
+//	HighLight1(keyDauSach[0], 0, xDauSach, yDauSach, GREEN, AQUA);
+//	ShowCur(false);
 }
 //===========================================
 
@@ -321,16 +308,13 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, 
 {
 	// 0 ---> 1; 1 ---> 2; 2 ----> 3 ; 3 ---> 0
 	if(flag == 1){
-		ShowCur(false);
 		
 		gotoxy(xSubMenu - 1, ykey[pos]);
-		SetBGColor(GREEN);
-		SetColor(WHITE);
+		SetBGColor(AQUA);
 		cout << key[pos];
 		
 		gotoxy(xSubMenu - 1,ykey[(pos + nKey - 1) % nKey]);
 		SetBGColor(BLACK);
-		SetColor(LIGHT_YELLOW);
 		cout <<key[(pos + nKey - 1)% nKey];
 	}
 	else if (flag == 2){
@@ -338,13 +322,11 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, 
 		ShowCur(false);
 		
 		gotoxy(xSubMenu - 1, ykey[pos]);
-		SetBGColor(GREEN);
-		SetColor(WHITE);
+		SetBGColor(AQUA);
 		cout << key[pos];
 
 		gotoxy(xSubMenu - 1, ykey[(pos + 1) % nKey]);
 		SetBGColor(BLACK);
-		SetColor(LIGHT_YELLOW);
 		cout << key[(pos + 1) % nKey];
 	}
 }
@@ -425,9 +407,7 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 //===========================================
 void DisplayDS(string key[],int nKey, int xDisplay[])
 {
-//	normalBGColor();
-	system("color CE");
-	//clrscr();
+	system("color 0E");
 	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
 	for (int i = 0; i < nKey;i++){
 		gotoxy(xDisplay[i] + 1 , yDisplay + 1);
@@ -496,6 +476,22 @@ void DisplayDS(string key[],int nKey, int xDisplay[])
 		{
 			cout << char(205); //duong thang ngang
 		}
+	}
+}
+//===========================================
+
+
+//===========================================
+void XoaMotDong(int width){
+	cout << " " << setw(width) << setfill(' ') << " ";
+}
+//===========================================
+
+//===========================================
+void XoaMotVung(int x, int y, int ndoc, int witdh){
+	for (int i =0 ; i<ndoc ;i++){
+		gotoxy(x , y + i);
+		XoaMotDong(witdh + 6);
 	}
 }
 //===========================================

@@ -4,35 +4,37 @@
 #define MAX_DAUSACH  100
 
 // Cac HotKey
-// Quay con tro ve 1 don vi char
+// NUT THEM
+#define KEY_INSERT 45
+// QUAY CON TRO 1 DON VI CHAR
 #define BACKSPACE 8
 // OK
 #define ENTER 13
-// thoat truc tiep va ve Menu chinh
-#define ESC  27
-// Di len
+//THOAT TRUC TIEP VA VE MENU CHINH
+#define ESC 27
+// DI LEN
 #define KEY_UP 72
-// Di xuong
+// DI XUONG
 #define KEY_DOWN 80
-// Di qua trai
+// DI QUA TRAI
 #define KEY_LEFT 75
-// Di qua phai 
+// DI QUA PHAI 
 #define KEY_RIGHT 77
-// Luu
+// SUA
 #define KEY_F2 60
-// Xoa
-#define KEY_F3 61
-// Hieu chinh
-#define KEY_F4 62
-// Save
-#define KEY_F10 68
-// Cuon page xuong duoi
+// XOA
+#define KEY_DELETE 46
+// HIEU CHINH
+#define KEY_F3 114
+// LUU
+#define KEY_F4 115
+// CUON PAGE XUONG DUOI
 #define PAGE_DOWN 81
-// Cuon page len tren
+// CUON PAGE LEN TREN
 #define PAGE_UP 73
-// Khoang trang
+// KHOANG TRANG
 #define SPACE  32
-//  Tim kiem
+// TIM KIEM
 #define KEY_F9 67
 
 // Tro ve
@@ -57,16 +59,12 @@ typedef unsigned int uint;
 
 // size man hinh
 //#define GWIDTH 1100
-#define GWIDTH 1200
-#define GHEIGHT 650
+#define GWIDTH 1300
+#define GHEIGHT 750
 
 // vi tri in ten, mssv, lop
 #define xTen 53
 #define yTen 22
-
-// vitri khung loading
-#define xLoading 15
-#define yLoading 33
 
 
 // vi tri menu chinh
@@ -92,7 +90,7 @@ typedef unsigned int uint;
 
 // toa do x cua SubMainMenus
 #define xDocGia 40
-#define xDauSach 52
+#define xDauSach 73
 #define xSach 52
 
 
@@ -104,7 +102,7 @@ typedef unsigned int uint;
 #define yDisplayTop10 5
 
 // toa do t cua cac hoat key F2, F3, F4, F10
-#define yHotkey 35
+#define yHotkey 45
 
 // vi tri Tieu de 
 #define xTitle 97
@@ -133,8 +131,8 @@ typedef unsigned int uint;
 #define NHAP_PHAI 0
 
 // vi tri dong chu thong bao
-#define X_NOTIFY 74
-#define Y_NOTIFY 19
+#define X_NOTICE 74
+#define Y_NOTICE 19
 
 // vi tri subMainMenu4 
 

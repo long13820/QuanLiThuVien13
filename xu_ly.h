@@ -30,8 +30,7 @@ int *mangMaDocGia;
 
 //===================================================================
 void GioiThieu(){
-	system("color CE");
-	ShowCur(false);
+	system("color 0E");
 	string a;
 	
 	//LAY TU FILE O CHE DO CHI DOC
@@ -72,21 +71,11 @@ void GioiThieu(){
 	cout << "LOP   : D18CQCN01-N";
 	
 	//CayLoading(LIGHT_YELLOW);**//SAU KHI XONG SE THEM
-//	ShowCur(false);
+	ShowCur(false);
 	
 	// NHAN ENTER DE THOAT KHOI VONG LAP
-	gotoxy(45, 35);
-//	SetBGColor(BLUE);
+	gotoxy(75, 35);
 	cout << "PRESS ENTER TO CONTINUE!! ";
-//	normalBGColor();
-	
-	while(!_kbhit())
-	{
-		gotoxy(35,30);
-		SetColor(1 +rand() % 15);
-		Sleep(100);
-		//cout<<"LIBRARY MANAGEMENT";
-	}
 //	SetBGColor(AQUA);
 //	SetColor(AQUA);
 	cin.ignore();
@@ -103,10 +92,9 @@ void Load_DG(NODE_DG &tree){
 
 //===================================================================
 void ManHinhChinh(){
-	system("color CE");
-	//clrscr();
-//	ShowCur(false);
-//	VeKhungMenu();
+	system("color 0E");
+	clrscr();
+
 	DrawMainMenu(keyMainMenu, 5);
 	
 	string a;
@@ -120,7 +108,7 @@ void ManHinhChinh(){
 		while(!inFile.eof()){
 			getline(inFile,a);
 			Sleep(100);
-			gotoxy(25, y++);
+			gotoxy(40, y++);
 			cout <<a<<endl;
 		}
 	}
@@ -128,20 +116,18 @@ void ManHinhChinh(){
 	{
 		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
 	}
-//	normalBGColor();
-	SetBGColor(BLACK);
 	
 	// SET KHUNG
-	gotoxy(xOrdinal + 44, yOrdinal + 34);
+	gotoxy(xOrdinal + 64, yOrdinal + 34);
 	cout << char(201) << setw(40) << setfill(char(205)) << char(187);
 
-	gotoxy(xOrdinal + 44, yOrdinal + 35);
+	gotoxy(xOrdinal + 64, yOrdinal + 35);
 	cout << char(186) << setw(40) << setfill(' ') << char(186);
 
-	gotoxy(xOrdinal + 44, yOrdinal + 36);
+	gotoxy(xOrdinal + 64, yOrdinal + 36);
 	cout << char(200) << setw(40) << setfill(char(205)) << char(188);
 
-	ChuChay(dongChuChay, xOrdinal + 50, yOrdinal + 35);
+	ChuChay(dongChuChay, xOrdinal + 70, yOrdinal + 35);
 	inFile.close();
 	return;
 }
@@ -151,12 +137,25 @@ void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
 	
-//	//Load data from file
+//Load data from file
 //	Load_DG(tree);
 	
-	// hieu ung introduce.
-	GioiThieu();
 	
+//	// Load mang ma doc gia
+//	fstream inFile;
+//	inFile.open("MangSoNgauNhien.txt", ios::in);
+//	int n; // so phan tu cua mang
+//	inFile >> n;
+//	mangMaDocGia = new int[n];
+//	for(int i = 0; i < n; i++)
+//	{
+//		inFile >>  mangMaDocGia[i];
+//	}
+//	inFile.close();
+//	
+//		clrscr();
+	// HIEU UNG INTRODUCE.
+	GioiThieu();
 	clrscr();//XOA MAN HINH
 	
 	int type;
@@ -168,28 +167,28 @@ void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
 label:
 	 ManHinhChinh();
 	 if(check) {type= ChooseMainMenu(5);}
-	 gotoxy(55,32);
+	 gotoxy(75,32);
 	 cout << "ESC: VE MENU CHINH";
 	 
 	 switch(type)
 	 {
-	 	case 0:
-	 		MenuDocGia(keyDocGia, 3);
-	 		
-	 		result = ChonMucTrongMenu(keyDocGia,xDocGia, yDocGia, 3);
-	 		
-	 		if(result == -1){
-	 			check = true ;	
-	 			goto label;
-			}
-			if (result == 0)
-			{
-				Menu_DocGia(tree);
-			}
+//	 	case 0:
+//	 		MenuDocGia(keyDocGia, 3);
+//	 		
+//	 		result = ChonMucTrongMenu(keyDocGia,xDocGia, yDocGia, 3);
+//	 		
+//	 		if(result == -1){
+//	 			check = true ;	
+//	 			goto label;
+//			}
+//			if (result == 0)
+//			{
+//				Menu_DocGia(tree);
+//			}
 //	 		check = false;
 //			type = 0;
 //			goto label;
-	 		//break;
+//	 		break;
 	 	case 1:
 	 		MenuDauSach(keyDauSach, 3);
 	 		
@@ -203,25 +202,28 @@ label:
 			if(result == 0){
 				Menu_DauSach(lDS);
 			}
+			else if( result == 1){
+				Output_ListDStheoTT(lDS);
+			}
 			check = false;
 			type = 1;
 			goto label;
 			break;
-		case 2:
-	 		MenuSach(keySach, 3);
-	
-	 		result = ChonMucTrongMenu(keySach, xSach, ySach, 3);
-	 		
-	 		if(result == -1)
-	 		{
-	 			check = true;
-				goto label;	
-			}
-			
+//		case 2:
+//	 		MenuSach(keySach, 3);
+//	
+//	 		result = ChonMucTrongMenu(keySach, xSach, ySach, 3);
+//	 		
+//	 		if(result == -1)
+//	 		{
+//	 			check = true;
+//				goto label;	
+//			}
+//			
 //			check = false;
 //			type = 2;
 //			goto label;
-			break;
+//			break;
 //		case 3:
 //			//LUU DATA TU CHUONG TRINH VAO FILE
 //			return;

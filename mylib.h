@@ -176,7 +176,7 @@ void normalTextColor() {
 void normalBGColor()
 {
 	SetColor(LIGHT_YELLOW);
-	SetBGColor(AQUA);
+	SetBGColor(BLACK);
 }
 
 char getCursorChar()    /// Function which returns character on console's cursor position 
