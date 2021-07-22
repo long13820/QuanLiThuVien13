@@ -4,8 +4,8 @@
 #define MAX_DAUSACH  100
 
 // Cac HotKey
-// NUT THEM
-#define KEY_INSERT 45
+//// NUT THEM
+//#define KEY_INSERT 224
 // QUAY CON TRO 1 DON VI CHAR
 #define BACKSPACE 8
 // OK
@@ -20,14 +20,14 @@
 #define KEY_LEFT 75
 // DI QUA PHAI 
 #define KEY_RIGHT 77
-// SUA
+//THEM
 #define KEY_F2 60
+// SUA
+#define KEY_F3 61
 // XOA
-#define KEY_DELETE 46
-// HIEU CHINH
-#define KEY_F3 114
+#define KEY_F4 62
 // LUU
-#define KEY_F4 115
+#define KEY_F10 68
 // CUON PAGE XUONG DUOI
 #define PAGE_DOWN 81
 // CUON PAGE LEN TREN
@@ -40,8 +40,6 @@
 // Tro ve
 #define TAB 9
 
-// thay unsigned int thanh uint
-typedef unsigned int uint;
 
 // ma mau
 #define AQUA 3
@@ -102,7 +100,7 @@ typedef unsigned int uint;
 #define yDisplayTop10 5
 
 // toa do t cua cac hoat key F2, F3, F4, F10
-#define yHotkey 45
+#define yHotkey 40
 
 // vi tri Tieu de 
 #define xTitle 97
@@ -131,7 +129,7 @@ typedef unsigned int uint;
 #define NHAP_PHAI 0
 
 // vi tri dong chu thong bao
-#define X_NOTICE 74
+#define X_NOTICE 107
 #define Y_NOTICE 19
 
 // vi tri subMainMenu4 

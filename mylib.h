@@ -45,7 +45,7 @@ char getCursorChar();
 /// Function which reads character at specific coordinates
 char readChar(int x, int y); 
 
-
+void BGColor();
 
 
 
@@ -172,7 +172,10 @@ void clrscr()
 void normalTextColor() {
 	SetColor(LIGHT_YELLOW);
 }
-
+void BGColor(){
+	SetColor(LIGHT_YELLOW);
+	SetBGColor(AQUA);
+}
 void normalBGColor()
 {
 	SetColor(LIGHT_YELLOW);

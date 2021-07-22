@@ -15,8 +15,8 @@ void DrawMainMenu(string key[], int nKey);
 // TAO O HINH CHU NHAT THAY DOI THEO CHIEU DAI TEXT TRUYEN VAO
 void CreateBox(int x, int y, string text, int length);
 
-//IN RA DONG CHU CHAY VAO CONSOLE
-void ChuChay(char dChu[], int x ,int y);
+// VE HINH BANG NHAP
+void VeHinhBangNhap(int x, int y, int dorong, string str);
 
 //hieu ung chon cac muc trong MainMenu
 int ChooseMainMenu(int nKey);
@@ -48,15 +48,18 @@ void MenuSach(string key[], int nKey);
 void EffectiveMenu(int pos , int flag);
 
 void EffectiveSubMenu(string key[], int xSubMenu, int ykey[], int nkey, int pos, int flag);
-// highlight o Menu con
-void HighLight1(string key, int index, int x, int y[], int newColor, int oldColor);
 
+// ve bang nhap thong tin
+void BangNhap(int x, int y, int nngang, string key[], int nkey);
+
+// ve bang huong dan Guides
+void BangGuides(int x, int y, int nngang, string key[], int nkey);
 
 string keyMainMenu[5] = { " ***MENU CHINH*** ", "QUAN LY DOC GIA", "QUAN LY DAU SACH ", "QUAN LY SACH", "THOAT" };
 
 string keyDisplayDG[5] = { "MA DG", "     HO DG", "TEN DG", "PHAI  ", "TT THE" };
 
-string keyDisplayDS[6] = {"        DAU SACH", " ISBN ", "    TAC GIA", "  THE LOAI ", " SO TRG ", " NXB"};
+string keyDisplayDS[6] = {"        DAU SACH", "  ISBN", "    TAC GIA", "  THE LOAI ", " SO TRANG", " NXB"};
 
 string keyDocGia[3] = { "            CAP NHAT DOC GIA                 ",
 							"     HIEN THI DANH SACH TAT CA DOC GIA       ",
@@ -68,7 +71,31 @@ string keySach[3] = { "       TRA SACH       ",
 string keyDauSach[3] = { "    CAP NHAT DAU SACH   ",
 							"  HIEN THI CAC DAU SACH " ,
 							" CAP NHAT DANH MUC SACH "};
-int xDisplayDS[7] = { 1, 35, 42, 61, 73, 83 , 93 };
+							
+string keyBangNhapDauSach[14] = {"               CAP NHAT DAU SACH               ",
+									"                                                     ",
+									" TEN SACH     :",
+									"                                                     ",
+									" ISBN         :",
+									"                                                     ",
+									" TAC GIA      :",
+									"                                                     ",
+									" THE LOAI     :",
+									"                                                     ",
+									" SO TRANG     :",
+									"                                                     ",
+									" NAM XUAT BAN :",
+									"                                                     " };
+
+string keyGuide2[7] = { "                     GUIDES                   ",
+						"-> TEN SACH     : Toi da 24 ky tu, gom co chu va so ",
+						"-> ISBN         : Gom 6 ky tu, chi lay ky tu chu    ",
+						"-> TAC GIA      : Toi da 17 ky tu, chi lay ky tu chu" ,
+						"-> THE LOAI     : Toi da 11 ky tu, chi lay ky tu chu" ,
+						"-> SO TRANG     : So trang khong qua 999999         " ,
+						"-> NAM XUAT BAN : Nam XB khong lon hon nam hien tai " };
+
+int xDisplayDS[7] = { 1, 30, 40, 59, 74, 84, 95 };
 int xMainMenus[5] = { 18,50,76, 105,130 };
 int yDocGia[3] = { 20, 24, 28};
 int yDauSach[3] = { 20, 24, 28 };
@@ -79,16 +106,16 @@ int xDisplayDG[6] = { 3,13, 32,46,53,65 };
 
 
 
-//===========================================
+//===========================================2
 void DrawMainMenu(string key[], int nKey){
 	for (int i=0; i < nKey;i++)
 	{
 		CreateBox(xMainMenus[i],yMainMenu, key[i],(int)key[i].length());
 	}
 }
-//===========================================
+//===========================================2
 
-//===========================================
+//===========================================1
 void CreateBox(int x,int y, string text, int length)
 {
 	gotoxy(x - 2, y - 1);
@@ -100,32 +127,8 @@ void CreateBox(int x,int y, string text, int length)
 	gotoxy(x - 2, y + 1);
 	cout << char(200) << setw(length) << setfill(char(205)) << char(205) << char(188);
 }
-//===========================================
+//===========================================1
 
-//===========================================
-void ChuChay(char dChu[], int x ,int y){
-	SetColor(WHITE);
-	ShowCur(false);
-	char c[40];
-	int length = (int)strlen(dChu);
-	
-	for (int i=0; i<length;i++)
-	{
-		strncpy(c,dChu+i,40);
-		c[39]='\0';
-		Sleep(100);
-		gotoxy(x,y);
-		cout<<"                                  ";
-		gotoxy(x, y); // VI TRI DE IN DONG CHU CHAY
-		cout << c;
-		if (i == length - 1) i = 0;  // CHAY VO HAN
-
-		if (_kbhit()) {
-			normalBGColor();
-			return;  // CO PHIM NHAN VAO THI DUNG
-		}
-	}
-}
 //===========================================
 
 //===========================================
@@ -213,24 +216,19 @@ void MenuDocGia(string key[], int nKey){
 	{
 		CreateBox(xDocGia, yDocGia[i], key[i], (int)key[i].length());
 	}
-	HighLight1(keyDocGia[0], 0, xDocGia, yDocGia, GREEN, AQUA);
 	ShowCur(false);
 }
 //===========================================
 
-//===========================================
+//===========================================3
 void MenuDauSach(string key[], int nKey)
 {
-//	normalBGColor();
-//	SetBGColor(BLACK);
 	for (int i = 0; i < nKey; i++)
 	{
 		CreateBox(xDauSach, yDauSach[i], key[i], (int)key[i].length());
 	}
-//	HighLight1(keyDauSach[0], 0, xDauSach, yDauSach, GREEN, AQUA);
-//	ShowCur(false);
 }
-//===========================================
+//===========================================3
 
 //===========================================
 void MenuSach(string key[], int nKey)
@@ -241,27 +239,14 @@ void MenuSach(string key[], int nKey)
 	{
 		CreateBox(xSach, ySach[i], key[i],(int)key[i].length());
 	}
-	HighLight1(keySach[0], 0, xSach, ySach, GREEN, AQUA);
 	ShowCur(false);
 }
 //===========================================
 
 
-//===========================================
-void HighLight1(string key , int index, int x, int y[], int newColor, int oldColor){
-	//DEN DIA CHI CAN HIGHLIGHT
-	gotoxy(x-1, y[index]);
-//	SetBGColor(newColor);
-	SetColor(WHITE);
-	cout << key;
-	SetBGColor(oldColor);
-}
-//===========================================
-
-//===========================================
+//===========================================4
 int ChonMucTrongMenu(string key[], int xSubMenu, int ykey[], int nKey){
 	int currposSubMainMenu = 0;
-	ShowCur(false);
 	
 	int kb_hit;
 	while(true)
@@ -301,9 +286,9 @@ int ChonMucTrongMenu(string key[], int xSubMenu, int ykey[], int nKey){
 		}
 	}
 }
-//===========================================
+//===========================================4
 
-//===========================================
+//===========================================5
 void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, int flag)
 {
 	// 0 ---> 1; 1 ---> 2; 2 ----> 3 ; 3 ---> 0
@@ -330,7 +315,7 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, 
 		cout << key[(pos + 1) % nKey];
 	}
 }
-//===========================================
+//===========================================5
 
 //===========================================
 void DisplayDG(string key[],int nKey, int xDisplay[]){
@@ -489,9 +474,80 @@ void XoaMotDong(int width){
 
 //===========================================
 void XoaMotVung(int x, int y, int ndoc, int witdh){
-	for (int i =0 ; i<ndoc ;i++){
+	for (int i =0 ; i< ndoc ;i++){
 		gotoxy(x , y + i);
 		XoaMotDong(witdh + 6);
 	}
+}
+//===========================================
+
+//===========================================
+void BangNhap(int x, int y , int nngang, string key[], int nkey){
+	int i;
+//	SetColor(WHITE);
+	for (i = 0; i < nkey + 2; i++)
+	{
+		gotoxy(x, y + i);
+		if (i == 0)
+		{
+			cout << char(218) << setw(nngang + 10) << setfill(char(196)) << char(191);
+		}
+		else if (i == nkey + 1)
+		{
+			cout << char(192) << setw(nngang + 10) << setfill(char(196)) << char(217);
+		}
+		else {
+			cout << char(124);
+			cout << key[i - 1];
+			gotoxy(x + nngang + 10, y + i);
+			cout << char(124);
+		}
+	}
+}
+//===========================================
+
+//===========================================
+void BangGuides(int x,int y,int nngang, string key[],int nkey){
+	int i;
+	// ve khung
+	for (i = 0; i < nkey + 2; i++)
+	{
+		gotoxy(x, y + i);
+		if (i == 0)
+		{
+			cout << char(218) << setw(nngang + 10) << setfill(char(196)) << char(191);
+		}
+		else if (i == nkey + 1)
+		{
+			cout << char(192) << setw(nngang + 10) << setfill(char(196)) << char(217);
+		}
+		else {
+			cout << char(124);
+			cout << key[i - 1];
+			gotoxy(x + nngang + 10, y + i);
+			cout << char(124);
+		}
+	}
+}
+//===========================================
+
+//===========================================
+void VeHinhBangNhap(int x, int y, int dorong, string str){
+	gotoxy(x, y - 1);
+	cout << setw(dorong) << setfill(' ') << " ";
+	gotoxy(x, y );
+	cout << setw(dorong) << setfill(' ') << " ";
+	gotoxy(x, y + 1);
+	cout << setw(dorong) << setfill(' ') << " ";
+	gotoxy(x + (int)str.length()/ 3, y + 1);
+	
+	gotoxy(x, y );
+	cout << str;
+	gotoxy(x, y + 2);
+	cout << setw(4) << setfill(' ') << " ";
+	gotoxy(x + dorong - 4, y + 2);
+	cout << setw(4) << setfill(' ') << " ";
+	gotoxy(x, y + 3);
+	cout << setw(dorong) << setfill(' ') << " ";
 }
 //===========================================

@@ -17,20 +17,22 @@ void GioiThieu();
 // XU LY MENU CHINH
 void MainMenu();
 
-// hieu ung man hinh chinh
+// HIEU UNG MAN HINH CHINH
 void ManHinhChinh();
 
-// load du lieu doc gia tu File 
-void Load_DG(NODE_DG &tree);
-
+//// load du lieu doc gia tu File 
+//void Load_DG(NODE_DG &tree);
+//LOAD DU LIEU DAU SACH TU FILE
+void Load_DS(LIST_DAUSACH &lDS);
 //HIEU UNG CHU CHAY
 char dongChuChay[] = "   WELCOME TO MANAGER LIBRARY";
 
 int *mangMaDocGia;
 
-//===================================================================
+//===================================================================2
 void GioiThieu(){
 	system("color 0E");
+	ShowCur(false);
 	string a;
 	
 	//LAY TU FILE O CHE DO CHI DOC
@@ -70,27 +72,69 @@ void GioiThieu(){
 	gotoxy(xTen+70, yTen + 2);
 	cout << "LOP   : D18CQCN01-N";
 	
-	//CayLoading(LIGHT_YELLOW);**//SAU KHI XONG SE THEM
-	ShowCur(false);
-	
 	// NHAN ENTER DE THOAT KHOI VONG LAP
 	gotoxy(75, 35);
 	cout << "PRESS ENTER TO CONTINUE!! ";
-//	SetBGColor(AQUA);
-//	SetColor(AQUA);
 	cin.ignore();
 	
 	return;
 }
-//===================================================================
+//===================================================================2
 
 //===================================================================
-void Load_DG(NODE_DG &tree){
-	
+void Load_DS(LIST_DAUSACH &lDS){
+	fstream inFile;
+	dauSach info;
+	inFile.open("DauSach.txt", ios::in);
+	pDAU_SACH pDS;
+	DMS dms;
+	int sodausach, sosach;
+	if(inFile.is_open()){
+		string temp;
+		inFile >> sodausach;
+		getline(inFile, temp);
+		
+		for (int i = 0;i < sodausach; i++)
+		{
+			pDS = new DAU_SACH;
+			if(pDS == NULL) continue;
+			
+			//LOAD THONG TIN VAO BIEN TAM
+			
+			getline(inFile, info.tensach);
+			getline(inFile, info.ISBN);
+			getline(inFile, info.tacgia);
+			getline(inFile, info.theloai);
+			inFile >> info.sotrang;
+			inFile >> info.namxuatban;
+			
+			//LOAD THONG TIN VAO DAU SACH
+			pDS->info = info;
+			
+			inFile >> sosach;
+			getline(inFile, temp);
+			initList_DMS(pDS->dms);
+			for (int j = 0; j< sosach; j++)
+			{
+				getline(inFile , dms.masach);
+				inFile >> dms.ttsach;
+				if(dms.ttsach == 1) pDS->soluongsachdamuon++;
+				getline(inFile, temp);
+				getline(inFile, dms.vitrisach);
+				AddTailList_DMS(pDS->dms, dms);
+			}
+			
+			Insert_DauSach(lDS, pDS);
+		}
+	}
+	else {
+		cout << "KET NOI VOI FILE DauSach THAT BAI! ";
+	}
+	inFile.close();
 }
 //===================================================================
 
-//===================================================================
+//===================================================================3
 void ManHinhChinh(){
 	system("color 0E");
 	clrscr();
@@ -117,29 +161,20 @@ void ManHinhChinh(){
 		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
 	}
 	
-	// SET KHUNG
-	gotoxy(xOrdinal + 64, yOrdinal + 34);
-	cout << char(201) << setw(40) << setfill(char(205)) << char(187);
-
-	gotoxy(xOrdinal + 64, yOrdinal + 35);
-	cout << char(186) << setw(40) << setfill(' ') << char(186);
-
-	gotoxy(xOrdinal + 64, yOrdinal + 36);
-	cout << char(200) << setw(40) << setfill(char(205)) << char(188);
-
-	ChuChay(dongChuChay, xOrdinal + 70, yOrdinal + 35);
 	inFile.close();
 	return;
 }
-//===================================================================
+//===================================================================3
+
+//===================================================================1
 void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
 	// set console window.
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
 	
-//Load data from file
+	//LOAD DATA TU FILE
 //	Load_DG(tree);
-	
+	Load_DS(lDS);
 	
 //	// Load mang ma doc gia
 //	fstream inFile;
@@ -153,7 +188,7 @@ void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
 //	}
 //	inFile.close();
 //	
-//		clrscr();
+	clrscr();
 	// HIEU UNG INTRODUCE.
 	GioiThieu();
 	clrscr();//XOA MAN HINH
@@ -203,7 +238,7 @@ label:
 				Menu_DauSach(lDS);
 			}
 			else if( result == 1){
-				Output_ListDStheoTT(lDS);
+				Xuat_ListDStheoTT(lDS);
 			}
 			check = false;
 			type = 1;
@@ -232,3 +267,4 @@ label:
 	}
 	
 }
+//=============================================================1

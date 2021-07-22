@@ -43,30 +43,30 @@ void Create_ArrMADG(TREE_DG tree, int* arr){
 //===========================================
 
 //============================================
-void Menu_DocGia(TREE_DG &tree){
-	system("color CE");
-	clrscr();
-	//normalBGColor();
-	int tttrang = 1 ;
-	int esc = 1;
-	clrscr();
-	gotoxy(26, 1);
-	cout << "CAP NHAT DOC GIA ";
-
-	gotoxy(3, yHotkey );
-	SetColor(WHITE);
-	cout << "ESC-Thoat, F2 - Them, F3 - Sua, F4 - Xoa, F10 - Luu, PgUP, PgDn";
-	normalBGColor();
-	do
-	{
-		DOC_GIA data;
-		
-		index = 0;
-		int* arrMADG = new int[nDG];
-		DisplayDG(keyDisplayDG, 5, xDisplayDG);
-		Create_ArrMADG(tree,arrMADG);
-//		esc = 
-		
-	}while(true);
-}
+//void Menu_DocGia(TREE_DG &tree){
+//	system("color CE");
+//	clrscr();
+//	//normalBGColor();
+//	int tttrang = 1 ;
+//	int esc = 1;
+//	clrscr();
+//	gotoxy(26, 1);
+//	cout << "CAP NHAT DOC GIA ";
+//
+//	gotoxy(3, yHotkey );
+//	SetColor(WHITE);
+//	cout << "ESC-Thoat, F2 - Them, F3 - Sua, F4 - Xoa, F10 - Luu, PgUP, PgDn";
+//	normalBGColor();
+//	do
+//	{
+//		DOC_GIA data;
+//		
+//		index = 0;
+//		int* arrMADG = new int[nDG];
+//		DisplayDG(keyDisplayDG, 5, xDisplayDG);
+//		Create_ArrMADG(tree,arrMADG);
+////		esc = 
+//		
+//	}while(true);
+//}
 //============================================
