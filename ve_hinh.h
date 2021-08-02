@@ -18,17 +18,17 @@ void CreateBox(int x, int y, string text, int length);
 // VE HINH BANG NHAP
 void VeHinhBangNhap(int x, int y, int dorong, string str);
 
-//hieu ung chon cac muc trong MainMenu
-int ChooseMainMenu(int nKey);
+//HIEU UNG CHON CAC MUC TRONG MENU
+int ChonMucTrongMenu(int nKey);
 
-//hieu ung chon cac muc trong SubMenu
-int ChonMucTrongMenu(string key[], int xSubMenu, int ykey[], int nkey);
+//HIEU UNG CHON CAC MUC TRONG MENU CHUC NANG
+int ChonMucTrongMenuChucNang(string key[], int xSubMenu, int ykey[], int nkey);
 
-// ham hien thi bang thong tin dau sach
-void DisplayDS(string key[], int nKey, int xDisplay[]);
+// HAM HIEN THI BANG THONG TIN DAU SACH
+void KhungHienThiDS(string key[], int nKey, int xHienThi[]);
 
-// ham hien thi bang thong tin doc gia
-void DisplayDG(string key[], int nKey, int xDisplay[]);
+//HAM HIEN THI BANG THONG TIN DANH MUC SACH
+void KhungHienThiDMS(string key[], int nKey, int xHienThi[]);
 
 // xoa mot dong
 void XoaMotDong(int width);
@@ -52,14 +52,16 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[], int nkey, int pos,
 // ve bang nhap thong tin
 void BangNhap(int x, int y, int nngang, string key[], int nkey);
 
-// ve bang huong dan Guides
-void BangGuides(int x, int y, int nngang, string key[], int nkey);
+// VE BANG HUONG DAN
+void BangHuongDan(int x, int y, int nngang, string key[], int nkey);
 
-string keyMainMenu[5] = { " ***MENU CHINH*** ", "QUAN LY DOC GIA", "QUAN LY DAU SACH ", "QUAN LY SACH", "THOAT" };
 
-string keyDisplayDG[5] = { "MA DG", "     HO DG", "TEN DG", "PHAI  ", "TT THE" };
 
-string keyDisplayDS[6] = {"        DAU SACH", "  ISBN", "    TAC GIA", "  THE LOAI ", " SO TRANG", " NXB"};
+string keyMainMenu[5] = { " MENU CHINH ", "QUAN LY DOC GIA", "QUAN LY DAU SACH ", "QUAN LY SACH", "THOAT" };
+
+string keyKhungHienThiDS[6] = {"        DAU SACH", "  ISBN", "    TAC GIA", "  THE LOAI ", " SO TRANG", " NXB"};
+
+string keyKhungHienThiDMS[3] = { "MA SACH", "TRANG THAI", "            VI TRI" };
 
 string keyDocGia[3] = { "            CAP NHAT DOC GIA                 ",
 							"     HIEN THI DANH SACH TAT CA DOC GIA       ",
@@ -71,7 +73,14 @@ string keySach[3] = { "       TRA SACH       ",
 string keyDauSach[3] = { "    CAP NHAT DAU SACH   ",
 							"  HIEN THI CAC DAU SACH " ,
 							" CAP NHAT DANH MUC SACH "};
-							
+string keyBangNhapDanhMucSach[8] = {"                    CAP NHAT DANH MUC SACH                   ",
+								    "                                                                   ",
+								   " MA SACH           :",
+								   "                                                                   ",
+								   " TRANG THAI[0,1,2] :",
+								   "                                                                   ",
+								   " VI TRI CUA SACH   :",
+								   "                                                                   " };
 string keyBangNhapDauSach[14] = {"               CAP NHAT DAU SACH               ",
 									"                                                     ",
 									" TEN SACH     :",
@@ -87,15 +96,22 @@ string keyBangNhapDauSach[14] = {"               CAP NHAT DAU SACH              
 									" NAM XUAT BAN :",
 									"                                                     " };
 
-string keyGuide2[7] = { "                     GUIDES                   ",
-						"-> TEN SACH     : Toi da 24 ky tu, gom co chu va so ",
-						"-> ISBN         : Gom 6 ky tu, chi lay ky tu chu    ",
-						"-> TAC GIA      : Toi da 17 ky tu, chi lay ky tu chu" ,
-						"-> THE LOAI     : Toi da 11 ky tu, chi lay ky tu chu" ,
-						"-> SO TRANG     : So trang khong qua 999999         " ,
-						"-> NAM XUAT BAN : Nam XB khong lon hon nam hien tai " };
 
-int xDisplayDS[7] = { 1, 30, 40, 59, 74, 84, 95 };
+string keyHuongDan2[7] = { "                     BANG HUONG DAN                   ",
+						" TEN SACH     : Toi da 24 ky tu, gom co chu va so ",
+						" ISBN         : Gom 6 ky tu, chi lay ky tu chu    ",
+						" TAC GIA      : Toi da 17 ky tu, chi lay ky tu chu" ,
+						" THE LOAI     : Toi da 11 ky tu, chi lay ky tu chu" ,
+						" SO TRANG     : So trang khong qua 999999         " ,
+						" NAM XUAT BAN : Nam XB khong lon hon nam hien tai " };
+
+string keyHuongDan3[4] = { "                         BANG HUONG DAN                             ",
+					   " MA SACH  :  Ma Sach duoc danh tu dong                           ",
+					   " TT       : 0  = cho muon duoc, 1 = da duoc muon, 2 = da thanh ly",
+					   " VI TRI   : Toi da 17 ky tu, chi lay ky tu chu, so va dau phay   "};
+int xKhungHienThiDS[7] = { 1, 30, 40, 59, 74, 84, 95 };
+
+int xKhungHienThiDMS[4] = { 2, 14,29,64 };
 int xMainMenus[5] = { 18,50,76, 105,130 };
 int yDocGia[3] = { 20, 24, 28};
 int yDauSach[3] = { 20, 24, 28 };
@@ -190,7 +206,7 @@ void EffectiveMenu(int pos, int flag){
 		cout << keyMainMenu[pos + 1] ;
 		
 		gotoxy(xMainMenus[(pos + 3) % 4 + 1] - 1 , yMainMenu);
-		normalBGColor();
+		SetBGColor(BLACK);
 		cout << keyMainMenu[(pos + 3)% 4 + 1];
 	}
 	else if (flag == 2)
@@ -202,7 +218,7 @@ void EffectiveMenu(int pos, int flag){
 		cout <<  keyMainMenu[pos + 1];
 		
 		gotoxy(xMainMenus[(pos + 1) % 4 + 1] - 1, yMainMenu);
-		normalBGColor();
+		SetBGColor(BLACK);
 		cout <<keyMainMenu[(pos + 1) % 4 + 1 ];
 	}	
 }
@@ -324,12 +340,12 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 	system("color CE");
 	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
 	for (int i=0; i< nKey ;i++){
-		gotoxy(xDisplay[i] + 3, yDisplay + 1);
+		gotoxy(xDisplay[i] + 3, yHienThi + 1);
 		cout << key[i];
 	}
 	//HIEN THI COT HAI BEN
 	SetColor(WHITE);
-	for (int j = yDisplay;j <= yDisplay + 32 ;j++)
+	for (int j = yHienThi;j <= yHienThi + 32 ;j++)
 	{
 		for (int i = 0 ; i <nKey + 1;i++)
 		{
@@ -340,7 +356,7 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 	//HIEN THI DONG HAI BEN
 	for (int i = xDisplay[0]; i <= xDisplay[nKey]; i++)
 	{
-		gotoxy(i, yDisplay);
+		gotoxy(i, yHienThi);
 		if (i == xDisplay[1] || i == xDisplay[2] || i == xDisplay[3] || i == xDisplay[4])
 			cout << char(203);//nga 3
 		else if (i == xDisplay[0])
@@ -356,7 +372,7 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 			cout << char(205); //duong thang ngang
 		}
 
-		gotoxy(i, yDisplay + 2);
+		gotoxy(i, yHienThi + 2);
 		if (i == xDisplay[1] || i == xDisplay[2] || i == xDisplay[3] || i == xDisplay[4])
 			cout << char(206); //nga 4
 		else if (i == xDisplay[0])
@@ -372,7 +388,7 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 			cout << char(205); //duong thang ngang
 		}
 
-		gotoxy(i, yDisplay + 32);
+		gotoxy(i, yHienThi + 32);
 		if (i == xDisplay[nKey])
 		{
 			cout << char(188); //nga 3 sang trai
@@ -390,38 +406,39 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 //===========================================
 
 //===========================================
-void DisplayDS(string key[],int nKey, int xDisplay[])
+void KhungHienThiDS(string key[],int nKey, int xHienThi[])
 {
 	system("color 0E");
+	SetColor(WHITE);
 	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
 	for (int i = 0; i < nKey;i++){
-		gotoxy(xDisplay[i] + 1 , yDisplay + 1);
+		gotoxy(xHienThi[i] + 1 , yHienThi + 1);
 		cout << key[i];
 	}
 	//HIEN THI COT HAI BEN 
 	SetColor(WHITE);
-	for (int j = yDisplay; j <= yDisplay + 32; j++)
+	for (int j = yHienThi; j <= yHienThi + 32; j++)
 	{
 		for (int i = 0; i < nKey + 1; i++)
 		{
-			gotoxy(xDisplay[i], j);
+			gotoxy(xHienThi[i], j);
 
 			cout << char(186);
 		}
 	}
 
 	//HIEN THI DONG HAI BEN
-	for (int i = xDisplay[0]; i <= xDisplay[nKey]; i++)
+	for (int i = xHienThi[0]; i <= xHienThi[nKey]; i++)
 	{
 
-		gotoxy(i, yDisplay);
-		if (i == xDisplay[1] || i == xDisplay[2] || i == xDisplay[3] || i == xDisplay[4]  || i == xDisplay[5])
+		gotoxy(i, yHienThi);
+		if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3] || i == xHienThi[4]  || i == xHienThi[5])
 			cout << char(203);//nga 3
-		else if (i == xDisplay[0])
+		else if (i == xHienThi[0])
 		{
 			cout << char(201); //moc phai
 		}
-		else if (i == xDisplay[nKey])
+		else if (i == xHienThi[nKey])
 		{
 			cout << char(187);//moc trai
 		}
@@ -430,14 +447,14 @@ void DisplayDS(string key[],int nKey, int xDisplay[])
 			cout << char(205); //duong thang ngang
 		}
 
-		gotoxy(i, yDisplay + 2);
-		if (i == xDisplay[1] || i == xDisplay[2] || i == xDisplay[3] || i == xDisplay[4] || i == xDisplay[5])
+		gotoxy(i, yHienThi + 2);
+		if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3] || i == xHienThi[4] || i == xHienThi[5])
 			cout << char(206); //nga 4
-		else if (i == xDisplay[0])
+		else if (i == xHienThi[0])
 		{
 			cout << char(204); //nga 3 sang phai
 		}
-		else if (i == xDisplay[nKey])
+		else if (i == xHienThi[nKey])
 		{
 			cout << char(185);//nga 3 sang trai
 		}
@@ -446,16 +463,16 @@ void DisplayDS(string key[],int nKey, int xDisplay[])
 			cout << char(205); //duong thang ngang
 		}
 
-		gotoxy(i, yDisplay + 32);
-		if (i == xDisplay[0])
+		gotoxy(i, yHienThi + 32);
+		if (i == xHienThi[0])
 		{
 			cout << char(200); //qeo sang phai
 		}
-		else if (i == xDisplay[nKey])
+		else if (i == xHienThi[nKey])
 		{
 			cout << char(188); //qeo sang trai
 		}
-		else if (i == xDisplay[1] || i == xDisplay[2] || i == xDisplay[3] || i == xDisplay[4] || i == xDisplay[5])
+		else if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3] || i == xHienThi[4] || i == xHienThi[5])
 			cout << char(202);
 		else
 		{
@@ -507,7 +524,7 @@ void BangNhap(int x, int y , int nngang, string key[], int nkey){
 //===========================================
 
 //===========================================
-void BangGuides(int x,int y,int nngang, string key[],int nkey){
+void BangHuongDan(int x,int y,int nngang, string key[],int nkey){
 	int i;
 	// ve khung
 	for (i = 0; i < nkey + 2; i++)
@@ -533,6 +550,8 @@ void BangGuides(int x,int y,int nngang, string key[],int nkey){
 
 //===========================================
 void VeHinhBangNhap(int x, int y, int dorong, string str){
+	SetBGColor(BRIGHT_WHITE);
+	SetColor(BLACK);
 	gotoxy(x, y - 1);
 	cout << setw(dorong) << setfill(' ') << " ";
 	gotoxy(x, y );
@@ -549,5 +568,77 @@ void VeHinhBangNhap(int x, int y, int dorong, string str){
 	cout << setw(4) << setfill(' ') << " ";
 	gotoxy(x, y + 3);
 	cout << setw(dorong) << setfill(' ') << " ";
+	normalBGColor();
+}
+//===========================================
+
+//===========================================
+void KhungHienThiDMS(string key[], int nKey, int xHienThi[])
+{
+	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
+	for(int i = 0; i< nKey ;i++)
+	{
+		gotoxy(xHienThi[i] + 3, yHienThi + 1);
+		cout << key[i];
+	}
+	//HIEN THI COT HAI BEN
+	for(int j = yHienThi;j <= yHienThi + 32; j++)
+	{
+		for (int i = 0;i< nKey + 1;i++)
+		{
+			gotoxy(xHienThi[i], j);
+			
+			cout << char(186);
+		}
+	}
+	//HIEN THI DONG HAI BEN
+	for (int i = xHienThi[0];i <= xHienThi[nKey];i++)
+	{
+		gotoxy(i, yHienThi);
+		if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3])
+			cout << char(203);//NGA 3
+		else if (i == xHienThi[0])
+		{
+			cout << char(201); //MOC PHAI
+		}
+		else if (i == xHienThi[nKey])
+		{
+			cout << char(187);//MOC TRAI
+		}
+		else
+		{
+			cout << char(205); //DUONG THANG NGANG
+		}
+
+		gotoxy(i, yHienThi + 2);
+		if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3] )
+			cout << char(206); //NGA 4
+		else if (i == xHienThi[0])
+		{
+			cout << char(204); //NGA 3 SANG PHAI
+		}
+		else if (i == xHienThi[nKey])
+		{
+			cout << char(185);//NGA 3 SANG TRAI
+		}
+		else
+		{
+			cout << char(205); //DUONG THANG NGANG
+		}
+
+		gotoxy(i, yHienThi + 32);
+		if (i == xHienThi[nKey])
+		{
+			cout << char(188); //NGA 3 SANG TRAI
+		}
+		else if (i == xHienThi[1] || i == xHienThi[2] || i == xHienThi[3] )
+			cout << char(202);
+		else if (i == xHienThi[0])
+			cout << char(200); //NGA 3 SANG PHAI
+		else
+		{
+			cout << char(205); //DUONG THANG NGANG
+		}
+	}
 }
 //===========================================

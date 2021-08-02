@@ -178,7 +178,7 @@ void BGColor(){
 }
 void normalBGColor()
 {
-	SetColor(LIGHT_YELLOW);
+	SetColor(WHITE);
 	SetBGColor(BLACK);
 }
 

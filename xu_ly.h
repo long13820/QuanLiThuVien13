@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <conio.h>
-#include "DSDocGia.h"
+//#include "DSDocGia.h"
 //#include "DauSach.h"
 #include <string>
 #include "ve_hinh.h"
@@ -42,7 +42,7 @@ void GioiThieu(){
 		while(!inFile.eof())
 		{
 			getline(inFile,a);
-			SetColor(LIGHT_YELLOW);
+			SetColor(WHITE);
 			Sleep(30);
 			cout<<a<<endl;
 		}
@@ -52,7 +52,7 @@ void GioiThieu(){
 		cout << "Lien ket voi File introduce khong thanh cong! " << "\n";
 	}
 	
-	SetColor(LIGHT_YELLOW);
+	SetColor(WHITE);
 	gotoxy(xTen+10,yTen);
 	cout << "HOTEN : NGUYEN HOANG LONG";
 	gotoxy(xTen+10, yTen + 1);
@@ -117,8 +117,8 @@ void Load_DS(LIST_DAUSACH &lDS){
 			for (int j = 0; j< sosach; j++)
 			{
 				getline(inFile , dms.masach);
-				inFile >> dms.ttsach;
-				if(dms.ttsach == 1) pDS->soluongsachdamuon++;
+				inFile >> dms.trangthaisach;
+				if(dms.trangthaisach == 1) pDS->soluongsachdamuon++;
 				getline(inFile, temp);
 				getline(inFile, dms.vitrisach);
 				AddTailList_DMS(pDS->dms, dms);
@@ -139,7 +139,6 @@ void ManHinhChinh(){
 	system("color 0E");
 	clrscr();
 
-	DrawMainMenu(keyMainMenu, 5);
 	
 	string a;
 	int y=0;
@@ -151,6 +150,7 @@ void ManHinhChinh(){
 	if(inFile.good()){
 		while(!inFile.eof()){
 			getline(inFile,a);
+			SetColor(WHITE);
 			Sleep(100);
 			gotoxy(40, y++);
 			cout <<a<<endl;
@@ -161,13 +161,15 @@ void ManHinhChinh(){
 		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
 	}
 	
+	DrawMainMenu(keyMainMenu, 5);
+		
 	inFile.close();
 	return;
 }
 //===================================================================3
 
 //===================================================================1
-void MainMenu(TREE_DG &tree,LIST_DAUSACH &lDS){
+void MainMenu(LIST_DAUSACH &lDS){
 	// set console window.
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
@@ -239,6 +241,10 @@ label:
 			}
 			else if( result == 1){
 				Xuat_ListDStheoTT(lDS);
+			}
+			else if( result == 2)
+			{
+				Menu_DMS(lDS);
 			}
 			check = false;
 			type = 1;

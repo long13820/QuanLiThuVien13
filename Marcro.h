@@ -93,7 +93,7 @@
 
 
 // toa do y cua  bang hien thi
-#define yDisplay 2
+#define yHienThi 2
 
 #define yDisplayMT 18
 
