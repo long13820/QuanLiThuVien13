@@ -25,6 +25,8 @@ struct ListDMS{
 };
 typedef struct ListDMS LIST_DMS;
 
+
+
 //----------------------DAU SACH-------------------------
 struct dausach{
 	string tensach;
@@ -59,7 +61,7 @@ struct ListDauSach{
 };
 typedef struct ListDauSach LIST_DAUSACH;
 
-// Phep toan Empty
+// PHEP TOAN EMPTY
 int Empty_DauSach(LIST_DAUSACH list);
 
 //PHEP TOAN FULL
@@ -71,9 +73,9 @@ void Update_DauSach(LIST_DAUSACH &lDS, pDAU_SACH &pDS, bool isEdited = false);
 
 int ChonCacSach_DS(LIST_DAUSACH &lDS, int &thututrang, int tongtrang);
 
-void Xoa_OutDS_1line(int locate);
+void XoaDS_1line(int locate);
 
-void Xoa_OutDS_29lines();
+void XoaDS_29lines();
 
 void Xuat_DS(dauSach ds);
 
@@ -123,9 +125,9 @@ bool Check_DMS(NODE_DMS* nDMS);
 
 void AddTailList_DMS(LIST_DMS &list, DMS data);
 
-void Output_ListDMS(pDAU_SACH &pDS);
+void XuatDanhSachDMS(pDAU_SACH &pDS);
 
-void Output_ListDanhMucSach(pDAU_SACH &pDS);
+void Xuat_DMS(DMS dms);
 
 void XuatDMS_TheoTrang(pDAU_SACH pDS, int index);
 
@@ -189,7 +191,7 @@ int InsertOrder_DauSach(LIST_DAUSACH &list,pDAU_SACH &pDS){
 //======================================
 void Update_DauSach(LIST_DAUSACH &lDS,pDAU_SACH &pDS, bool isEdited){
 	dauSach info;
-	// hien con tro nhap
+	// HIEN CON TRO NHAP
 	ShowCur(true);
 	//CAC FLAG DIEU KHIEN QUA TRINH CAP NHAT
 	int ordinal = 0 ;
@@ -286,11 +288,10 @@ void Update_DauSach(LIST_DAUSACH &lDS,pDAU_SACH &pDS, bool isEdited){
 				ordinal = 1;
 				continue;
 			}
-				else if (tacgia.length() == 0)
+			else if (tacgia.length() == 0)
 			{
 				gotoxy(X_NOTICE + 15, Y_NOTICE);
 				cout << "CAC TRUONG DU LIEU KHONG DUOC DE TRONG !!! ";
-				normalBGColor();
 
 				// quay lai va dien vao truong du lieu do
 				ordinal = 2;
@@ -433,15 +434,14 @@ bool KiemTraDauSach(pDAU_SACH p1,pDAU_SACH p2){
 
 void Delete_DauSach(LIST_DAUSACH &list, int pos)
 {
-	if(pos > list.n-1 || Empty_DauSach(list)){
+	if(pos > list.n-1 || Empty_DauSach(list) ||list.n == 0){
 		return;
 	}
 	//XOA VI TRI CUOI MANG
 	if(pos == list.n-1){
 		delete list.ListDS[list.n-1];
 		//TRANH TINH TRANG CON TRO BI TREO
-		list.ListDS[list.n - 1] = NULL;
-		list.n = list.n-1;
+		list.ListDS[list.n--] = NULL;
 		return;
 	}
 	// CHO NAY QUAN TRONG
@@ -454,8 +454,7 @@ void Delete_DauSach(LIST_DAUSACH &list, int pos)
 	delete list.ListDS[list.n-1];
 	
 	//TRANH TINH TRANG CON TRO BI TREO
-	list.ListDS[list.n-1] = NULL;
-	list.n = list.n-1;
+	list.ListDS[list.n--] = NULL;
 	return;
 }
 
@@ -485,7 +484,7 @@ void selectionSort_DS(LIST_DAUSACH &lDS){
 
 
 //======================================
-void Xoa_OutDS_1line(int locate){
+void XoaDS_1line(int locate){
 	gotoxy(xKhungHienThiDS[0] + 1, yHienThi + 3 + locate);
 	cout << setw(27) << setfill(' ') << ' ';
 	gotoxy(xKhungHienThiDS[1] + 1, yHienThi + 3 + locate);
@@ -502,9 +501,9 @@ void Xoa_OutDS_1line(int locate){
 //======================================
 
 //======================================
-void Xoa_OutDS_29lines(){
+void XoaDS_29lines(){
 	for (int i = 0;i < NUMBER_LINES;i++){
-		Xoa_OutDS_1line(i);
+		XoaDS_1line(i);
 	}
 }
 //======================================
@@ -512,19 +511,19 @@ void Xoa_OutDS_29lines(){
 //======================================
 void Xuat_DS(dauSach ds){
 	ShowCur(false);
-	Xoa_OutDS_1line(locate);
+	XoaDS_1line(locate);
 	gotoxy(xKhungHienThiDS[0] + 3, yHienThi + 3 + locate);
 	cout << ds.tensach;
-	gotoxy(xKhungHienThiDS[1] + 3, yHienThi + 3 + locate);
+	gotoxy(xKhungHienThiDS[1] + 1, yHienThi + 3 + locate);
 	cout << ds.ISBN;
-	gotoxy(xKhungHienThiDS[2] + 3, yHienThi + 3 + locate);
+	gotoxy(xKhungHienThiDS[2] + 1, yHienThi + 3 + locate);
 	cout << ds.tacgia;
-	gotoxy(xKhungHienThiDS[3] + 3, yHienThi + 3 + locate);
+	gotoxy(xKhungHienThiDS[3] + 1, yHienThi + 3 + locate);
 	cout << ds.theloai;
 
-	gotoxy(xKhungHienThiDS[4] + 3, yHienThi + 3 + locate);
+	gotoxy(xKhungHienThiDS[4] + 1, yHienThi + 3 + locate);
 	cout << ds.sotrang;
-	gotoxy(xKhungHienThiDS[5] + 3, yHienThi + 3 + locate);
+	gotoxy(xKhungHienThiDS[5] + 1, yHienThi + 3 + locate);
 	cout << ds.namxuatban;
 	
 	locate++;
@@ -533,10 +532,11 @@ void Xuat_DS(dauSach ds){
 
 //=======================================
 void XuatDS_TheoTrang(LIST_DAUSACH &lDS, int index){
-	Xoa_OutDS_29lines();
+	XoaDS_29lines();
+	SetColor(WHITE);
 	locate = 0 ;
 	index--;
-	if(lDS.n == 0){
+	if(lDS.n == -1){
 		return;
 	}
 	for (int i = NUMBER_LINES * index ; i< NUMBER_LINES*(1 + index) && i < lDS.n ; i++){
@@ -601,7 +601,7 @@ int ChonCacSach_DS(LIST_DAUSACH &lDS, int &thututrang, int tongtrang){
 					{
 						thututrang = tongtrang;
 					}
-					Xoa_OutDS_29lines();
+					XoaDS_29lines();
 					XuatDS_TheoTrang(lDS, thututrang);
 					pos = 0;
 					gotoxy(xKhungHienThiDS[0] + 1, yHienThi + 3 + pos);
@@ -625,11 +625,10 @@ void Xuat_ListDStheoTT(LIST_DAUSACH lDS){
 	clrscr();
 	
 	selectionSort_DS(lDS);
-label:
 	KhungHienThiDS(keyKhungHienThiDS, 6 ,xKhungHienThiDS);
 	gotoxy(10, 1);
 	cout << "BANG THONG TIN CAC DAU SACH THEO THU TU THE LOAI VA TEN SACH TANG DAN";
-	int nDS = lDS.n;
+	int nDS = lDS.n + 1;
 	int thututrang, tongtrang;
 	thututrang = 1;
 	tongtrang = (nDS / NUMBER_LINES) + 1;
@@ -680,12 +679,64 @@ label:
 						}
 						else
 						{
-							Output_ListDanhMucSach(temp);
-							clrscr();
-							goto label;
+							gotoxy(120, 8);
+							cout << "THONG TIN TRA CUU DUOC !";
+							gotoxy(109, 10);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 12);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 14);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 16);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 18);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 20);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 22);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 24);
+							cout << setw(50) << setfill('-') << "-";
+							gotoxy(109, 11);
+							cout << "TEN SACH: " << temp->info.tensach;
+							gotoxy(109, 13);
+							cout << "TAC GIA: " << temp->info.tacgia;
+							gotoxy(109, 15);
+							cout << "THE LOAI: " << temp->info.theloai;
+							gotoxy(109, 17);
+							cout << "NAM XUAT BAN: " << temp->info.namxuatban;
+							gotoxy(109, 19);
+							cout << "ISBN: " << temp->info.ISBN;
+							gotoxy(109 ,21);
+							cout << "TONG SO SACH CUA DAU SACH: " << temp->dms.n;
+							gotoxy(109, 23); 
+							cout << "SO SACH CON TRONG THU VIEN:  " << temp->dms.n - TongSoSachDuocMuon(temp->dms);
+							gotoxy(109, 25);
+							cout << "CAC MA SACH CON CO TRONG THU VIEN: ";
+							
+							//THUC HIEN IN MA SACH RA THEO DUNG FORMAT
+							int i = 0, j = 0, count = 0;
+							for (NODE_DMS* p = temp->dms.pHead; p!= NULL;p = p->pNext)
+							{
+								gotoxy(109 + i, 26+ j);
+								if(p->data.trangthaisach == 0)
+								{
+									cout << p->data.masach;
+									i += 10;
+									count++;
+									if(count == 5)
+									{
+										j++;
+										i = 0;
+										count = 0;
+									}
+								}
+							}
+							_getch();
+							XoaMotVung(109,1,35,50);
 						}
 					}
-					break;
+				break;
 				// thoat
 				case ESC:
 					return ;
@@ -703,33 +754,33 @@ label:
 
 //=======================================1
 void Menu_DauSach(LIST_DAUSACH &lDS){
+	
 	clrscr();
-	system("color 0E");
-	selectionSort_DS(lDS);
-label1:	
-	SetColor(WHITE);
-	gotoxy(35, 1);
-	cout << "CAP NHAT DAU SACH "; 
+
 	//nDS la so DS hien co trong danh sach tuyen tinh
-	int nDS = lDS.n;
+	int nDS = lDS.n + 1;
 	int choose;
 	pDAU_SACH pDS;
-	
-	gotoxy(3, yHotkey);
-	cout << "HOTKEY:  ESC - Thoat, F2 - Them, F3 - Sua, F4 - Xoa, F10 - Luu, PgUP, PgDn";
-
 	// thu tu trang
 	int thututrang, tongtrang;
 	thututrang = 1;
 	tongtrang = (nDS / NUMBER_LINES) + 1;
 	
+label1:		
 	XoaMotVung(109,yHienThi, 30 , 53);
 	KhungHienThiDS(keyKhungHienThiDS,6,xKhungHienThiDS);
 	XuatDS_TheoTrang(lDS, thututrang);
 	int kb_hit;
 	do{
+		gotoxy(35, 1);
+		cout << "CAP NHAT DAU SACH "; 
+	
+		gotoxy(3, yHotkey);
+		cout << "HOTKEY:  ESC - Thoat, F2 - Them, F3 - Sua, F4 - Xoa, F10 - Luu, PgUP, PgDn";
+
 		if(_kbhit()){
 			kb_hit = _getch();
+			if(kb_hit == 224 || kb_hit == 0) kb_hit = _getch();
 			switch(kb_hit){
 				case PAGE_UP:
 					(thututrang > 1) ? thututrang-- : thututrang = tongtrang;
@@ -766,6 +817,8 @@ label1:
 						cout << "                                                      ";	
 						goto label1;
 					}
+					
+					_getch();
 					Delete_DauSach(lDS, choose);
 					goto label1;
 				case ESC:
@@ -811,7 +864,7 @@ void Menu_DMS(LIST_DAUSACH &lDS)
 {
 	system("color 0E");
 	int choose;
-	int nDS = lDS.n;
+	int nDS = lDS.n + 1;
 	int thututrang = 1;
 	int tongtrang =(nDS /NUMBER_LINES) + 1;
 	int temp = 1;
@@ -890,83 +943,7 @@ bool Check_DMS(NODE_DMS* nDMS){
 }
 //=======================================
 
-//=======================================
-void Output_ListDanhMucSach(pDAU_SACH &pDS){
-	// THU TU TRANG
 
-	clrscr();
-	
-	gotoxy(93, 8);
-	cout << "THONG TIN TRA CUU DUOC !";
-	gotoxy(82, 10);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 12);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 14);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 16);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 18);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 20);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 22);
-	cout << setw(50) << setfill('-') << "-";
-	gotoxy(82, 24);
-	cout << setw(50) << setfill('-') << "-";
-//	normalBGColor();
-	gotoxy(82, 11);
-	cout << "TEN SACH: " << pDS->info.tensach;
-	gotoxy(82, 13);
-	cout << "TAC GIA: " << pDS->info.tacgia;
-	gotoxy(82, 15);
-	cout << "THE LOAI: " << pDS->info.theloai;
-	gotoxy(82, 17);
-	cout << "NAM XUAT BAN: " << pDS->info.namxuatban;
-	gotoxy(82, 19);
-	cout << "ISBN: " << pDS->info.ISBN;
-	gotoxy(82 ,21);
-	cout << "TONG SO SACH CUA DAU SACH: " << pDS->dms.n;
-	gotoxy(82, 23); 
-	cout << "SO SACH CON TRONG THU VIEN:  " << pDS->dms.n - TongSoSachDuocMuon(pDS->dms);
-	
-	int thututrang = 1;
-	int tongtrang = ((pDS->dms.n + 1) / NUMBER_LINES ) + 1;
-	gotoxy(8, 1);
-	cout << " BANG DANH MUC SACH CUA DAU SACH : " << pDS->info.tensach;
-	
-	int kb_hit;	
-	do
-	{
-	//	XoaMotVung(65,2,  30, 67);
-		if (_kbhit())
-		{
-			kb_hit = _getch();
-			if (kb_hit == 224 || kb_hit == 0)
-				kb_hit = _getch();
-			switch (kb_hit)
-			{
-			case PAGE_UP:
-				(thututrang > 1) ? thututrang-- : thututrang = tongtrang;
-			//	OutputDMS_PerPage(pDS, tttrang);
-				break;
-
-			case PAGE_DOWN:
-				(thututrang <  tongtrang) ? thututrang++ : thututrang = 1;
-			//	OutputDMS_PerPage(pDS, tttrang);
-				break;
-			case ESC:
-				return;
-			}
-		}
-		ShowCur(false);
-		gotoxy(54, 35);
-		cout << "Trang " << thututrang << " / " << tongtrang;
-
-	} while (true);
-
-}
-//=======================================
 
 //=======================================
 int TongSoSachDuocMuon(LIST_DMS dms){
@@ -1003,7 +980,6 @@ void AddTailList_DMS(LIST_DMS &list, DMS data)
 void NhapDanhMucSach(pDAU_SACH &pDS, int sosach)
 {
 	clrscr();
-	system("color 0E");
 	int check = 0 ;
 	SetColor(WHITE);
 	gotoxy(39, 2);
@@ -1025,7 +1001,7 @@ void NhapDanhMucSach(pDAU_SACH &pDS, int sosach)
 		cout << "SO SACH DA NHAP : " << i + 1;		
 	}
 	
-	Output_ListDMS(pDS);
+	XuatDanhSachDMS(pDS);
 }
 //=======================================
 
@@ -1111,15 +1087,14 @@ int NhapSach(pDAU_SACH &pDS)
 //=======================================
 
 //=======================================
-void Output_ListDMS(pDAU_SACH &pDS)
+void XuatDanhSachDMS(pDAU_SACH &pDS)
 {
 	//THU TU TRANG
 	clrscr();
 	int check1;
 	int check2;
 	int check3;
-	int trangthaisach, tongtrang;
-	trangthaisach = 1;
+	int thututrang = 1, tongtrang;
 	tongtrang = ((pDS->dms.n + 1) / NUMBER_LINES) + 1;
 	NODE_DMS* temp = NULL, *temp1 = NULL;
 	gotoxy(8,1);
@@ -1127,7 +1102,61 @@ void Output_ListDMS(pDAU_SACH &pDS)
 
 label:
 	KhungHienThiDMS(keyKhungHienThiDMS, 3, xKhungHienThiDMS);
-//	XuatDMS_TheoTrang(pDS, thututrang);
+	XuatDMS_TheoTrang(pDS, thututrang);
+	string keySearch = "";
+	
+	int kb_hit;
+	do
+	{
+		XoaMotVung(65,2,  30, 67);
+		if (_kbhit())
+		{
+			kb_hit = _getch();
+			if (kb_hit == 224 || kb_hit == 0) kb_hit = _getch();
+			switch (kb_hit)
+			{
+				case PAGE_UP:
+					(thututrang > 1) ? thututrang-- : thututrang = tongtrang;
+					XuatDMS_TheoTrang(pDS, thututrang);
+					break;
+
+				case PAGE_DOWN:
+					(thututrang <  tongtrang) ? thututrang++ : thututrang = 1;
+					XuatDMS_TheoTrang(pDS, thututrang);
+					break;
+				case  KEY_F3:
+					VeHinhBangNhap(82, 3, 38, " HAY NHAP VAO MA SACH CAN HIEU CHINH");
+					gotoxy(96, 5);
+					check1 = NhapMaDauSach(keySearch);
+					// KIEM TRA DIEU KIEN TRA VE
+					if (check1 == -1)
+					{
+						gotoxy(84, Y_NOTICE + 12);
+						cout << "BAN VUA HUY TAC VU HIEU CHINH !!!";
+						_getch();
+					}
+//					else if (check1 == 1)
+//					{
+//						temp = Search_DMS1(pDS, keySearch);
+//						if (temp == NULL)
+//						{
+//							gotoxy(77, Y_NOTICE + 12);
+//							cout << "BAN VUA NHAP MA SACH " << "'" << keySearch << "'" << " KHONG CO TRONG DU LIEU";
+//							_getch();
+//						}
+//					}
+					
+					goto label;
+				case ESC:
+					return;
+			}
+		}
+		ShowCur(false);
+		gotoxy(3, 35);
+		cout << "HotKey:  F3 - Hieu chinh , F4 - Xoa , ESC - Thoat";
+		gotoxy(54, 35);
+		cout << "Trang " << thututrang << " / " << tongtrang;
+	}while(true);
 	
 }
 //=======================================
@@ -1135,6 +1164,69 @@ label:
 //=======================================
 void XuatDMS_TheoTrang(pDAU_SACH pDS, int index)
 {
-	
+	XoaDMS_29lines();
+	locate = 0;
+	if(pDS->dms.pHead == NULL && pDS->dms.pTail ==NULL) return;
+	index--;
+	index *=NUMBER_LINES;
+	int count = 0;
+	NODE_DMS *temp = NULL; 
+	for ( temp = pDS->dms.pHead ; temp != NULL  && count < index ; temp = temp->pNext)
+	{
+		count++;
+	}
+	for (int i = 0; i < NUMBER_LINES && temp != NULL; i++)
+	{
+		Xuat_DMS(temp->data);
+		temp = temp->pNext;
+	}
+	return;
+}
+//=======================================
+
+//=======================================
+void XoaDMS_29lines()
+{
+	for (int i = 0; i <NUMBER_LINES; i++)
+	{
+		XoaDMS_1line(i);
+	}
+}
+//=======================================
+
+//=======================================
+void XoaDMS_1line(int locate) 
+{
+	gotoxy(xKhungHienThiDMS[0] + 1, yHienThi + 3 + locate);
+	cout << setw(11) << setfill(' ') << ' ';
+	gotoxy(xKhungHienThiDMS[1] + 1, yHienThi + 3 + locate);
+	cout << setw(13) << setfill(' ') << ' ';
+	gotoxy(xKhungHienThiDMS[2] + 1, yHienThi + 3 + locate);
+	cout << setw(34) << setfill(' ') << ' ';
+}
+//=======================================
+
+//=======================================
+void Xuat_DMS(DMS dms)
+{
+	XoaDMS_1line(locate);
+	gotoxy(xKhungHienThiDMS[0] + 3, yHienThi + 3 + locate);
+	cout << dms.masach;
+	gotoxy(xKhungHienThiDMS[1] + 1, yHienThi + 3 + locate);
+	if (dms.trangthaisach == 0)
+	{
+		cout << "Cho Muon Duoc";
+	}
+	else if (dms.trangthaisach == 1)
+	{
+		cout << "Da Cho Muon";
+	}
+	else if (dms.trangthaisach == 2)
+	{
+		cout << "Da Thanh Ly";
+	}
+	gotoxy(xKhungHienThiDMS[2] + 10, yHienThi + 3 + locate);
+	cout << dms.vitrisach;
+	locate++;
 }
 //=======================================

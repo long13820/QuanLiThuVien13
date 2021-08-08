@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <conio.h>
-//#include "DSDocGia.h"
 //#include "DauSach.h"
 #include <string>
 #include "ve_hinh.h"
@@ -20,14 +19,13 @@ void MainMenu();
 // HIEU UNG MAN HINH CHINH
 void ManHinhChinh();
 
-//// load du lieu doc gia tu File 
-//void Load_DG(NODE_DG &tree);
+
 //LOAD DU LIEU DAU SACH TU FILE
 void Load_DS(LIST_DAUSACH &lDS);
-//HIEU UNG CHU CHAY
-char dongChuChay[] = "   WELCOME TO MANAGER LIBRARY";
+//SAVE TAT CA DAU SACH VAO FILE
+void Save_DS(LIST_DAUSACH lDS);
 
-int *mangMaDocGia;
+
 
 //===================================================================2
 void GioiThieu(){
@@ -114,7 +112,7 @@ void Load_DS(LIST_DAUSACH &lDS){
 			inFile >> sosach;
 			getline(inFile, temp);
 			initList_DMS(pDS->dms);
-			for (int j = 0; j< sosach; j++)
+			for (int j = 0; j < sosach; j++)
 			{
 				getline(inFile , dms.masach);
 				inFile >> dms.trangthaisach;
@@ -131,6 +129,41 @@ void Load_DS(LIST_DAUSACH &lDS){
 		cout << "KET NOI VOI FILE DauSach THAT BAI! ";
 	}
 	inFile.close();
+}
+//===================================================================
+
+//===================================================================
+void Save_DS(LIST_DAUSACH lDS)
+{
+	fstream outFile;
+	outFile.open("DauSach.txt", ios::out);
+	if(outFile.is_open())
+	{
+		outFile << lDS.n + 1 <<endl;
+		for (int i = 0 ; i <= lDS.n ;i++)
+		{
+			outFile <<lDS.ListDS[i]->info.tensach <<endl;
+			outFile <<lDS.ListDS[i]->info.ISBN<<endl;
+			outFile <<lDS.ListDS[i]->info.tacgia<<endl;
+			outFile <<lDS.ListDS[i]->info.theloai<<endl;
+			outFile <<lDS.ListDS[i]->info.sotrang<<endl;
+			outFile <<lDS.ListDS[i]->info.namxuatban<<endl;
+			
+			outFile <<lDS.ListDS[i]->dms.n <<endl;
+			
+			for (NODE_DMS* p  = lDS.ListDS[i]->dms.pHead ; p != NULL ;  p = p->pNext )
+			{
+				outFile << p->data.masach << endl;
+				outFile << p->data.trangthaisach << endl;
+				outFile << p->data.vitrisach << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "KET NOI VOI FILE DauSach THAT BAI! ";
+	}
+	outFile.close();
 }
 //===================================================================
 
@@ -170,105 +203,52 @@ void ManHinhChinh(){
 
 //===================================================================1
 void MainMenu(LIST_DAUSACH &lDS){
+	int result;
 	// set console window.
 	SetConsoleTitle(_T("QUAN LY THU VIEN"));
 	resizeConsole(GWIDTH, GHEIGHT);
 	
 	//LOAD DATA TU FILE
-//	Load_DG(tree);
 	Load_DS(lDS);
 	
-//	// Load mang ma doc gia
-//	fstream inFile;
-//	inFile.open("MangSoNgauNhien.txt", ios::in);
-//	int n; // so phan tu cua mang
-//	inFile >> n;
-//	mangMaDocGia = new int[n];
-//	for(int i = 0; i < n; i++)
-//	{
-//		inFile >>  mangMaDocGia[i];
-//	}
-//	inFile.close();
-//	
-	clrscr();
+
 	// HIEU UNG INTRODUCE.
 	GioiThieu();
 	clrscr();//XOA MAN HINH
 	
-	int type;
-	bool check = true;
-	int result;
+
+
 	//VONG LAP VO HAN DE XU LY
 	while(true)
 	{
-label:
-	 ManHinhChinh();
-	 if(check) {type= ChooseMainMenu(5);}
-	 gotoxy(75,32);
-	 cout << "ESC: VE MENU CHINH";
+	 	ManHinhChinh();
+	 	int type= ChooseMainMenu(5);
+	 	gotoxy(75,32);
+	 	cout << "ESC: VE MENU CHINH";
 	 
-	 switch(type)
-	 {
-//	 	case 0:
-//	 		MenuDocGia(keyDocGia, 3);
-//	 		
-//	 		result = ChonMucTrongMenu(keyDocGia,xDocGia, yDocGia, 3);
-//	 		
-//	 		if(result == -1){
-//	 			check = true ;	
-//	 			goto label;
-//			}
-//			if (result == 0)
-//			{
-//				Menu_DocGia(tree);
-//			}
-//	 		check = false;
-//			type = 0;
-//			goto label;
-//	 		break;
-	 	case 1:
-	 		MenuDauSach(keyDauSach, 3);
-	 		
-	 		result = ChonMucTrongMenu(keyDauSach, xDauSach, yDauSach, 3);
-	 		
-	 		if(result == -1)
-	 		{
-	 			check = true;
-				goto label;	
-			}
-			if(result == 0){
-				Menu_DauSach(lDS);
-			}
-			else if( result == 1){
-				Xuat_ListDStheoTT(lDS);
-			}
-			else if( result == 2)
-			{
-				Menu_DMS(lDS);
-			}
-			check = false;
-			type = 1;
-			goto label;
-			break;
-//		case 2:
-//	 		MenuSach(keySach, 3);
-//	
-//	 		result = ChonMucTrongMenu(keySach, xSach, ySach, 3);
-//	 		
-//	 		if(result == -1)
-//	 		{
-//	 			check = true;
-//				goto label;	
-//			}
-//			
-//			check = false;
-//			type = 2;
-//			goto label;
-//			break;
-//		case 3:
-//			//LUU DATA TU CHUONG TRINH VAO FILE
-//			return;
-	 }
+	 	switch(type)
+	 	{
+
+	 		case 1:
+	 			MenuDauSach(keyDauSach, 3);
+	 			result = ChonMucTrongMenu(keyDauSach, xDauSach, yDauSach, 3);
+				if(result == 0){
+					Menu_DauSach(lDS);
+				}
+				else if( result == 1){
+					Xuat_ListDStheoTT(lDS);
+				}
+				else if( result == 2)
+				{
+					Menu_DMS(lDS);
+				}
+				break;
+
+			case 3:
+				//LUU DATA TU CHUONG TRINH VAO FILE
+				Save_DS(lDS);
+				return;
+		 }	
 	 				
 	}
 	

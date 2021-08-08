@@ -119,7 +119,7 @@
 #define MAX_TENTG 17
 
 // chieu dai dai nhat cua ISBN
-#define MAX_ISBN 6
+#define MAX_ISBN 4
 
 // chieu dai dai nhat cua the loai sach
 #define MAX_THELOAISACH 11

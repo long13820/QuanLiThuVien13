@@ -263,7 +263,6 @@ void MenuSach(string key[], int nKey)
 //===========================================4
 int ChonMucTrongMenu(string key[], int xSubMenu, int ykey[], int nKey){
 	int currposSubMainMenu = 0;
-	
 	int kb_hit;
 	while(true)
 	{
@@ -336,8 +335,6 @@ void EffectiveSubMenu(string key[], int xSubMenu, int ykey[],int nKey, int pos, 
 //===========================================
 void DisplayDG(string key[],int nKey, int xDisplay[]){
 	ShowCur(true);
-	//normalBGColor();
-	system("color CE");
 	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
 	for (int i=0; i< nKey ;i++){
 		gotoxy(xDisplay[i] + 3, yHienThi + 1);
@@ -408,7 +405,6 @@ void DisplayDG(string key[],int nKey, int xDisplay[]){
 //===========================================
 void KhungHienThiDS(string key[],int nKey, int xHienThi[])
 {
-	system("color 0E");
 	SetColor(WHITE);
 	//HIEN THI CAC DANH MUC TRONG BANG HIEN THI
 	for (int i = 0; i < nKey;i++){
@@ -568,7 +564,6 @@ void VeHinhBangNhap(int x, int y, int dorong, string str){
 	cout << setw(4) << setfill(' ') << " ";
 	gotoxy(x, y + 3);
 	cout << setw(dorong) << setfill(' ') << " ";
-	normalBGColor();
 }
 //===========================================
 

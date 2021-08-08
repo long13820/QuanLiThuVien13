@@ -21,7 +21,10 @@ int NhapTenSachTimKiem(string &result);
 
 //NHAP SO LUONG SACH CAN NHAP VAO
 int ChonSoSachNhap(int &trangthaisach, int &ordinal, bool &isSave, bool &isEscape, int a, int b);
-//
+
+//HAM HO TRO NHAP MA DAU SACH TRONG DANH MUC SACH
+int NhapMaDauSach(string &result);
+
 //==================================1
 void NhapTenSach(string &tensach, int &ordinal, bool &isSave, bool &isEscape)
 {
@@ -57,7 +60,7 @@ void NhapTenSach(string &tensach, int &ordinal, bool &isSave, bool &isEscape)
 					count++;
 					cout << (char)kb_hit;
 					tensach += (char)kb_hit;
-					nSpace = 0;
+				//	nSpace = 0;
 				}
 				else if (kb_hit != SPACE)
 				{
@@ -65,7 +68,7 @@ void NhapTenSach(string &tensach, int &ordinal, bool &isSave, bool &isEscape)
 					kb_hit = toupper((char)kb_hit);
 					cout << (char)kb_hit;
 					tensach += (char)kb_hit;
-					nSpace = 1;
+				//	nSpace = 1;
 				}
 
 			}
@@ -186,7 +189,7 @@ void NhapISBN(string &isbn,int &ordinal, bool &isSave, bool &isEscape){
 			}
 			else {
 				gotoxy(X_NOTICE + 15, Y_NOTICE);
-				cout << "TOI DA 6 KY TU, CHI LAY KY TU CHU !!!";
+				cout << "TOI DA 4 KY TU, CHI LAY KY TU CHU !!!";
 				gotoxy(x, y);
 			}
 
@@ -205,7 +208,7 @@ void NhapTenTacGia(string &tentacgia,int &ordinal,bool &isSave,bool &isEscape){
 	int x,y;
 	//BIEN CO HIEU
 	int nSpace = 0;
-	
+	if(count > 0 && tentacgia[count-1] != ' ') nSpace = 1;
 	while(true){
 		x= wherex() - 1;
 		y= wherey() - 1;
@@ -551,17 +554,22 @@ void NhapNamXuatBan(int &namxuatban, int &ordinal, bool &isSave, bool &isEscape)
 
 //==================================7
 string ChuanHoaString(string result){
-	for (int i = 1; i < result.length();i++){
-		if(result[0] == ' '){
-			result.erase(0, 1);
-		}
-		else if( result[i - 1] == ' '&& result[i] == ' '){
-			result.erase(i - 1 , 1);
-			i--;
-		}
-		else if(result[result.length() - 1] == ' '){
-			result.erase(result.length() - 1, 1);
-		}
+//	for (int i = 1; i < result.length();i++){
+//		if(result[0] == ' '){
+//			result.erase(0, 1);
+//		}
+//		else if( result[i - 1] == ' '&& result[i] == ' '){
+//			result.erase(i - 1 , 1);
+//			i--;
+//		}
+//		else if(result[result.length() - 1] == ' '){
+//			result.erase(result.length() - 1, 1);
+//		}
+//	}
+ 	// Xoa khoang trang cuoi chuoi
+	if (result[result.length() - 1] == ' ')
+	{
+		result.erase(result.length() - 1, 1);
 	}
 	return result;
 }
@@ -858,3 +866,45 @@ void NhapViTriSach(string &vitrisach, int &ordinal, bool &isSave, bool &isEscape
 	}
 }
 //==================================11
+
+//==================================12
+int NhapMaDauSach(string &result)
+{
+	ShowCur(true);
+	// bien dem so chu da duoc nhap vao cho result
+	cout << result;
+	int count = (int)result.length();
+	while(true)
+	{
+		while(_kbhit())
+		{
+			int kb_hit = _getch();
+			// chi nhan chu thuong hoac  chu in hoa va so
+			// chi nhap ten toi da 7 ky tu, vi tu dai nhat tieng viet chi la 7.
+			if (((kb_hit >= 65 && kb_hit <= 90) || (kb_hit >= 97 && kb_hit <= 122) || (kb_hit >= 48 && kb_hit <= 57)
+			 || kb_hit == 44) && count <= 10 && count >= 0)
+			{
+				count++;
+				// chuyen qua in hoa
+				kb_hit = toupper((char)kb_hit);
+				cout << (char)kb_hit;
+				result += (char)kb_hit;
+			}
+			else if (kb_hit == ENTER)
+			{
+				return 1 ;
+			}
+			else if (kb_hit == BACKSPACE && count > 0)
+			{
+				cout << "\b" << " " << "\b";
+				count--;
+				result.erase(result.length() - 1, 1);
+			}
+			else if (kb_hit == ESC)
+			{
+				return  -1;
+			}
+		}
+	}
+}
+//==================================12
