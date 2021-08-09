@@ -119,10 +119,12 @@ void Menu_DMS(LIST_DAUSACH &lDS);
 //KHOI TAO
 void initList_DMS(LIST_DMS &list);
 
-NODE_DMS* GetNode_DMS(DMS data);
+//TAO NODE DMS MOI
+NODE_DMS* CreateNode_DMS(DMS data);
 //HAM KIEM TRA SACH XEM CO AI MUON HAY CHUA, CO THI TRA VE TRUE, KHONG THI FALSE
 bool Check_DMS(NODE_DMS* nDMS);
 
+//THEM DMS MOI VAO CUOI DANH SACH
 void AddTailList_DMS(LIST_DMS &list, DMS data);
 
 void XuatDanhSachDMS(pDAU_SACH &pDS);
@@ -534,7 +536,6 @@ void Xuat_DS(dauSach ds){
 void XuatDS_TheoTrang(LIST_DAUSACH &lDS, int index){
 	XoaDS_29lines();
 	SetColor(WHITE);
-	locate = 0 ;
 	index--;
 	if(lDS.n == -1){
 		return;
@@ -758,7 +759,7 @@ void Menu_DauSach(LIST_DAUSACH &lDS){
 	clrscr();
 
 	//nDS la so DS hien co trong danh sach tuyen tinh
-	int nDS = lDS.n + 1;
+	int nDS = lDS.n ;
 	int choose;
 	pDAU_SACH pDS;
 	// thu tu trang
@@ -818,7 +819,6 @@ label1:
 						goto label1;
 					}
 					
-					_getch();
 					Delete_DauSach(lDS, choose);
 					goto label1;
 				case ESC:
@@ -887,7 +887,6 @@ void Menu_DMS(LIST_DAUSACH &lDS)
 		if(choose == -1) return;
 		else if(choose > lDS.n)
 		{
-			
 			gotoxy(2, yHienThi + 3 + choose % NUMBER_LINES);
 			cout << setw(27) << setfill(' ')<< ' ';
 			continue;
@@ -906,7 +905,7 @@ void Menu_DMS(LIST_DAUSACH &lDS)
 			// BAT DAU NHAP THONG TIN SACH
 			NhapDanhMucSach(lDS.ListDS[choose], sosach);
 		}
-	}while(true);
+	} while(true);
 }
 
 //KHOI TAO
@@ -918,7 +917,7 @@ void initList_DMS(LIST_DMS &list){
 //=======================================
 
 //=======================================
-NODE_DMS* GetNode_DMS(DMS data){
+NODE_DMS* CreateNode_DMS(DMS data){
 	NODE_DMS *p = new NODE_DMS;
 	if(p == NULL){
 		return NULL;
@@ -963,9 +962,10 @@ int TongSoSachDuocMuon(LIST_DMS dms){
 void AddTailList_DMS(LIST_DMS &list, DMS data)
 {
 	//TAO NODE
-	NODE_DMS *p = GetNode_DMS(data);
-	if(list.pHead == NULL){
-		list.pHead = list.pTail = p;
+	NODE_DMS *p = CreateNode_DMS(data);
+	if(list.pHead == NULL)
+	{
+		list.pHead = list.pTail = p ;
 	}
 	else
 	{
@@ -999,8 +999,7 @@ void NhapDanhMucSach(pDAU_SACH &pDS, int sosach)
 		
 		gotoxy(60, 18);
 		cout << "SO SACH DA NHAP : " << i + 1;		
-	}
-	
+	}	
 	XuatDanhSachDMS(pDS);
 }
 //=======================================
@@ -1228,5 +1227,36 @@ void Xuat_DMS(DMS dms)
 	gotoxy(xKhungHienThiDMS[2] + 10, yHienThi + 3 + locate);
 	cout << dms.vitrisach;
 	locate++;
+}
+//=======================================
+
+//=======================================
+void QuanLiDauSach(LIST_DAUSACH &lDS)
+{
+	system("cls");
+	int ch2;
+	cout<<"\n\n\n\tQUAN LY SACH";
+	cout<<"\n\n\t1.CAP NHAT DAU SACH ";
+	cout<<"\n\n\t2.HIEN THI CAC DAU SACH ";
+	cout<<"\n\n\t3.CAP NHAT DANH MUC SACH";
+	cout<<"\n\n\t4.BACK TO MAIN MENU";
+	cout<<"\n\n\tPlease Enter Your Choice (1-4) ";
+	cin>>ch2; fflush(stdin);
+	switch(ch2)
+	{
+		case 1:
+			Menu_DauSach(lDS);
+			break;
+		case 2:
+			Xuat_ListDStheoTT(lDS);
+			break;
+		case 3:
+			Menu_DMS(lDS);
+			break;
+		case 4:
+			return;
+		default:cout<<"\a";
+	}
+	QuanLiDauSach(lDS);
 }
 //=======================================

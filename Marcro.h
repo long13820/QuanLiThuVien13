@@ -61,8 +61,8 @@
 #define GHEIGHT 750
 
 // vi tri in ten, mssv, lop
-#define xTen 53
-#define yTen 22
+#define xTen 43
+#define yTen 12
 
 
 // vi tri menu chinh

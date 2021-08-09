@@ -33,24 +33,13 @@ void GioiThieu(){
 	ShowCur(false);
 	string a;
 	
-	//LAY TU FILE O CHE DO CHI DOC
-	ifstream inFile("introduce.txt",ios::in);
-	if(inFile.good()) //KIEM TRA XEM FILE CO KET NOI DUOC HAY KHONG ?
-	{
-		while(!inFile.eof())
-		{
-			getline(inFile,a);
-			SetColor(WHITE);
-			Sleep(30);
-			cout<<a<<endl;
-		}
-	}
-	else  //TRA VE LOI
-	{
-		cout << "Lien ket voi File introduce khong thanh cong! " << "\n";
-	}
 	
 	SetColor(WHITE);
+	
+	gotoxy(60,1); cout << "  _   _ _   _   _  _    _    _    ___  _ _  _ _    _ _  _  ___  _  _    ";
+	gotoxy(60,2); cout << " / \\ | | | / \\ | \\| |  | |  | |  |_ _|| U || | |  | | || || __|| \\| |   ";
+	gotoxy(60,3); cout << "( o )| U || o || \\\\ |  | |_ | |   | | |   || U |  | V || || _| | \\\\ |   ";
+	gotoxy(60,4); cout << " \\_,7|___||_n_||_|\\_|  |___||_|   |_| |_n_||___|   \\_/ |_||___||_|\\_|   ";	
 	gotoxy(xTen+10,yTen);
 	cout << "HOTEN : NGUYEN HOANG LONG";
 	gotoxy(xTen+10, yTen + 1);
@@ -175,28 +164,13 @@ void ManHinhChinh(){
 	
 	string a;
 	int y=0;
-	
-	//LAY TU FILE VA CHI DOC
-	ifstream inFile("QuanLyThuVien.txt",ios::in);
-	
-	//KIEM TRA XEM FILE CO KET NOI DC KO
-	if(inFile.good()){
-		while(!inFile.eof()){
-			getline(inFile,a);
-			SetColor(WHITE);
-			Sleep(100);
-			gotoxy(40, y++);
-			cout <<a<<endl;
-		}
-	}
-	else  //TRA VE LOI
-	{
-		cout << "Lien ket voi File QuanlyThuVien khong thanh cong! " << "\n";
-	}
-	
-	DrawMainMenu(keyMainMenu, 5);
+	SetColor(WHITE);
+	gotoxy(60,1); cout << "  _   _ _   _   _  _    _    _    ___  _ _  _ _    _ _  _  ___  _  _    ";
+	gotoxy(60,2); cout << " / \\ | | | / \\ | \\| |  | |  | |  |_ _|| U || | |  | | || || __|| \\| |   ";
+	gotoxy(60,3); cout << "( o )| U || o || \\\\ |  | |_ | |   | | |   || U |  | V || || _| | \\\\ |   ";
+	gotoxy(60,4); cout << " \\_,7|___||_n_||_|\\_|  |___||_|   |_| |_n_||___|   \\_/ |_||___||_|\\_|   ";	
+//	DrawMainMenu(keyMainMenu, 5);
 		
-	inFile.close();
 	return;
 }
 //===================================================================3
@@ -217,40 +191,42 @@ void MainMenu(LIST_DAUSACH &lDS){
 	clrscr();//XOA MAN HINH
 	
 
-
+	char ch;
 	//VONG LAP VO HAN DE XU LY
-	while(true)
+	do
 	{
-	 	ManHinhChinh();
-	 	int type= ChooseMainMenu(5);
-	 	gotoxy(75,32);
-	 	cout << "ESC: VE MENU CHINH";
-	 
-	 	switch(type)
-	 	{
-
-	 		case 1:
-	 			MenuDauSach(keyDauSach, 3);
-	 			result = ChonMucTrongMenu(keyDauSach, xDauSach, yDauSach, 3);
-				if(result == 0){
-					Menu_DauSach(lDS);
-				}
-				else if( result == 1){
-					Xuat_ListDStheoTT(lDS);
-				}
-				else if( result == 2)
-				{
-					Menu_DMS(lDS);
-				}
+		system("cls");
+		cout<<"\n\t\tMAIN MENU\n";
+		cout<<"\n\t01. QUAN LY SACH";
+		cout<<"\n\t02. QUAN LY DOC GIA";
+		cout<<"\n\t03. QUAN LY MUON SACH";
+		cout<<"\n\t04. QUAN LY TRA SACH";
+		cout<<"\n\t05. THONG KE";
+		cout<<"\n\t06. EXIT";
+		cout<<"\n\n\tPlease Select Your Option (1-6) ";
+		cin>>ch; fflush(stdin);
+		switch(ch)
+		{
+			case '1':
+				system("cls");
+				QuanLiDauSach(lDS);
 				break;
-
-			case 3:
-				//LUU DATA TU CHUONG TRINH VAO FILE
-				Save_DS(lDS);
-				return;
-		 }	
-	 				
-	}
-	
+			case '2':
+			//	DG_management();
+				break;
+			case '3':
+			//	PhieuMuon_management();
+				break;
+			case '4':
+			//	Tra_management();
+				break;
+			case '6':
+				exit(0);
+				default :cout<<"\a";
+		}
+	}while(ch!=6);
+		
 }
+	
+
 //=============================================================1
